@@ -4,7 +4,7 @@ This repository provides access to and documentation for the sketch databases co
 
 ## Overview
 
-The Logan project comprises 4.8 million publicly available datasets released before December 2023. To enable efficient analysis of these datasets without requiring access to the complete 700TB dataset collection, we have generated sketch representations using two complementary techniques. This repository releases all sketches to facilitate dataset exploration and comparison at scale.
+The Logan project comprises the assemblies of 4.8 million publicly available datasets released before December 2023. To enable efficient analysis of the generated unitigs without requiring access to the complete 4.5PB collection, we have generated sketch representations using two complementary techniques. This repository releases all sketches to facilitate dataset exploration and comparison at scale.
 
 The two sketching methods provided are:
 - **FracMinHash** – See [FracMinHashes](#fracminhashes) section
@@ -38,9 +38,9 @@ sourmash sketch dna -p dna,k=31,scaled=1000,abund <file_to_sketch.fa> -o sketch_
 
 ## DotHashes
 
-DotHash sketches represent each dataset as a fixed-dimensional 2048-element vector. Datasets with similar vector representations are expected to share sequence content. DotHash sketches offer potential performance advantages over FracMinHash sketches due to their fixed dimensionality and simplified manipulation.
+DotHash sketches represent each dataset as a fixed-dimensional 2048-element vector.
 
-A key property of DotHash vectors is that the scalar product of two dataset sketches provides an unbiased estimate of the intersection size of their 31-mer sets, scaled by the factor 1000/2048. For a comprehensive understanding of DotHash methodology, limitations, and approximation characteristics, please refer to the relevant paper [TODO: Add citation].
+The key property of DotHash vectors is that the scalar product of two dataset sketches provides an unbiased estimate of the intersection size of their 31-mer sets, scaled in our case by the factor 1000/2048. For a comprehensive understanding of DotHash methodology, limitations, and approximation characteristics, please refer to the our paper [TODO: Add citation to ourselves].
 
 [TODO: Explain database access procedures]
 
@@ -60,7 +60,7 @@ make
 
 **Sketch Generation:**
 ```
-/path_to_DNA_to_vector/DNA_to_vector/DNA_to_vector/bin/dna_to_vector <input.fa> <output.bin> [options]
+/path_to_DNA_to_vector/DNA_to_vector/bin/dna_to_vector <input.fa> <output.bin> [options]
 
 Arguments:
   input.fa       Input FASTA file with DNA sequences
