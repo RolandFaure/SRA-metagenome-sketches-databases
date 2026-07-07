@@ -7,8 +7,8 @@ This repository provides access to and documentation for the sketch databases co
 The Logan project comprises the assemblies of 4.8 million publicly available datasets released before December 2023. To enable efficient analysis of the generated unitigs without requiring access to the complete 4.5PB collection, we have generated sketch representations using two complementary techniques. This repository releases all sketches to facilitate dataset exploration and comparison at scale.
 
 The two sketching methods provided are:
-- **FracMinHash** – See [FracMinHashes](#fracminhashes) section
-- **DotHash** – See [DotHashes](#dothashes) section
+- **FracMinHash** – See the [FracMinHashes](#fracminhashes) section
+- **Hypervectors** – See the [Hypervectors](#hypervectors) section
 
 Additionally, we provide an all-vs-all similarity matrix for all 4.8 million datasets, where similarity is defined as the Jaccard index between the 31-mer sets of the Logan assemblies. See [all-vs-all similarity matrix](#all-vs-all-similarity-matrix) section.
 
@@ -41,17 +41,17 @@ sourmash sketch dna -p dna,k=31,scaled=1000,abund <file_to_sketch.fa> -o sketch_
 
 [TODO: Document database format and user interaction procedures]
 
-## DotHashes
+## Hypervectors
 
-DotHash sketches represent each dataset as a fixed-dimensional 2048-element vector.
+Hypervectors represent each dataset as a fixed-dimensional 2048-element vector.
 
-The key property of DotHash vectors is that the scalar product of two dataset sketches provides an unbiased estimate of the intersection size of their 31-mer sets, scaled in our case by the factor 1000/2048. For a comprehensive understanding of DotHash methodology, limitations, and approximation characteristics, please refer to the our paper [TODO: Add citation to ourselves].
+The key property of hypervectors is that the scalar product of two dataset sketches provides an unbiased estimate of the intersection size of their 31-mer sets, scaled in our case by the factor 1000/2048. For a comprehensive understanding of hypervector methodology, limitations, and approximation characteristics, please refer to the our paper [TODO: Add citation to ourselves].
 
 [TODO: Explain database access procedures and the format of the vectors]
 
 #### Generating Your Own Sketch
 
-To create a DotHash sketch for your dataset and compare it against the database, use the DNA_to_vector tool:
+To create a hypervector for your dataset and compare it against the database, use the DNA_to_vector tool:
 
 **Installation (via Conda, recommended):**
 ```
