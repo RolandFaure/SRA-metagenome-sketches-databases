@@ -12,6 +12,11 @@ The two sketching methods provided are:
 
 Additionally, we provide an all-vs-all similarity matrix for all 4.8 million datasets, where similarity is defined as the Jaccard index between the 31-mer sets of the Logan assemblies. See [all-vs-all similarity matrix](#all-vs-all-similarity-matrix) section.
 
+The metadata associated with all the metagenomes in the database is available here [TODO].
+
+Tutorials on how to use these resources are available here:
+[TODO: example use cases with the resources - taxonomic classification (FracMinHash)? Cluster accessions from a BioProject by similarity (similarity matrix and vector database)? Find the biome of a given metagenome (vector database or directly similarity.logan-search.org]
+
 ## FracMinHashes
 
 FracMinHash sketches have been generated for all datasets using [sourmash](https://sourmash.readthedocs.io/en/latest/index.html), following the [FracMinHash](https://joss.theoj.org/papers/10.21105/joss.00027) methodology. Each sketch was created by selecting one in every thousand 31-mers using the command: `sourmash sketch dna -p dna,k=31,scaled=1000,abund file_to_sketch.fa -o sketch_file`.
@@ -42,9 +47,9 @@ DotHash sketches represent each dataset as a fixed-dimensional 2048-element vect
 
 The key property of DotHash vectors is that the scalar product of two dataset sketches provides an unbiased estimate of the intersection size of their 31-mer sets, scaled in our case by the factor 1000/2048. For a comprehensive understanding of DotHash methodology, limitations, and approximation characteristics, please refer to the our paper [TODO: Add citation to ourselves].
 
-[TODO: Explain database access procedures]
+[TODO: Explain database access procedures and the format of the vectors]
 
-### Generating Your Own Sketch
+#### Generating Your Own Sketch
 
 To create a DotHash sketch for your dataset and compare it against the database, use the DNA_to_vector tool:
 
