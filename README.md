@@ -4,7 +4,7 @@ This repository provides access to and documentation for the sketch databases co
 
 ## Overview
 
-The Logan project comprises the assemblies of 4.8 million publicly available datasets released before December 2023. To enable efficient analysis of the generated unitigs without requiring access to the complete 4.5PB collection, we have generated sketch representations using two complementary techniques. This repository releases all sketches to facilitate dataset exploration and comparison at scale.
+The Logan project comprises the assemblies of 4.8 million publicly available metagenomic datasets released before December 2023. To enable efficient analysis of the generated unitigs without requiring access to the complete 4.5PB collection, we have generated sketch representations using two complementary techniques. This repository releases all sketches to facilitate dataset exploration and comparison at scale.
 
 The two sketching methods provided are:
 - **FracMinHash** – See the [FracMinHashes](#fracminhashes) section
