@@ -1,4 +1,4 @@
-# Logan Datasets Sketches Database
+# SRA Sketches Database
 
 This repository provides access to and documentation for the sketch databases containing compressed representations of all datasets in [Logan v1](https://github.com/IndexThePlanet/Logan).
 
