@@ -21,7 +21,7 @@ Tutorials on how to use these resources are available here:
 
 FracMinHash sketches have been generated for all datasets using [sourmash](https://sourmash.readthedocs.io/en/latest/index.html), following the [FracMinHash](https://joss.theoj.org/papers/10.21105/joss.00027) methodology. Each sketch was created by selecting one in every thousand 31-mers using the command: `sourmash sketch dna -p dna,k=31,scaled=1000,abund file_to_sketch.fa -o sketch_file`.
 
-[TODO: Explain database access procedures]
+The FracMinHash sketch database is distributed as a compressed archive. See [Logan_metagenome_FMH_sketches_decompression](https://github.com/adrita1999/Logan_metagenome_FMH_sketches_decompression) for instructions on downloading and decompressing the archive into individual `sourmash` `.sig` files.
 
 ### Generating Your Own Sketch
 
@@ -47,7 +47,7 @@ Hypervectors represent each dataset as a fixed-dimensional 2048-element vector.
 
 The key property of hypervectors is that the scalar product of two dataset sketches provides an unbiased estimate of the intersection size of their 31-mer sets, scaled in our case by the factor 1000/2048. For a comprehensive understanding of hypervector methodology, limitations, and approximation characteristics, please refer to the our paper [TODO: Add citation to ourselves].
 
-[TODO: Explain database access procedures and the format of the vectors]
+See [hypervector_database](https://github.com/RolandFaure/hypervector_database) for instructions on downloading the hypervector database, the format of its files, and how to query it against your own sketches.
 
 #### Generating Your Own Sketch
 
@@ -86,8 +86,7 @@ An online service is available at [similarity.logan-search.org](https://similari
 
 An all-vs-all similarity matrix has been computed for all 4.8 million datasets in Logan v1, including all datasets released on the SRA before December 2023. Similarity is defined as the Jaccard index between the 31-mers of each dataset's assembly. Only similarity values above 0.05 are included in the matrix.
 
-[TODO: Document database access procedures]
-[TODO: Document database format and structure]
+See [metagenome_vector_sketches](https://github.com/RolandFaure/metagenome_vector_sketches) for instructions on building, storing, and querying the similarity matrix, including its on-disk format.
 
 ## Citation
 
