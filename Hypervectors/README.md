@@ -21,12 +21,12 @@ conda install main::pkg-config conda-forge::sourmash-minimal conda-forge::eigen
 Clone the repository and build the project:
 
 ```bash
-git clone https://github.com/RolandFaure/hypervector_database.git
-cd hypervector_database
+git clone https://github.com/RolandFaure/SRA-sketches-database.git
+cd SRA-sketches-database/Hypervectors
 make
 ```
 
-Executables will be created in the `hypervector_database/bin/` directory. Check the installation by running:
+Executables will be created in the `SRA-sketches-database/Hypervectors/bin/` directory. Check the installation by running:
 
 ```bash
 ./bin/dna_to_vector --help

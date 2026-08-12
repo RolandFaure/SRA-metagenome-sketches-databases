@@ -22,12 +22,15 @@ A demo compressed archive, `compressed_archive.tar.xz`, is included to demonstra
 - Python 3
 - C++17 compiler (`g++`)
 
-### Clone the Repository [TODO: paths have changed]
+### Clone the Repository [TODO: paths have changed, this does not work anymore]
 
-Clone the main SRA-sketches-database repository and its submodules recursively:
+Clone the main SRA-sketches-database repository, go in the `similarity_matrix` folder, and build the scripts:
 
 ```bash
 git clone https://www.github.com/RolandFaure/SRA-sketches-database.git
+cd SRA-sketches-database/FMH
+mkdir build && cd build
+cmake .. && make -j 8
 ``` 
 Clone the repository and enter the project directory:hen 
 
