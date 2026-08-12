@@ -1,6 +1,6 @@
 # SRA Sketches Database
 
-This repository provides access to and documentation for the sketch databases containing compressed representations of all datasets in [Logan v1](https://github.com/IndexThePlanet/Logan).
+This repository provides access to and documentation for the sketch databases containing compressed representations of all metagenomic datasets in the SRA up to December 2023, based on [Logan v1](https://github.com/IndexThePlanet/Logan).
 
 ## Overview
 
@@ -21,7 +21,7 @@ Tutorials on how to use these resources are available here:
 
 FracMinHash sketches have been generated for all datasets using [sourmash](https://sourmash.readthedocs.io/en/latest/index.html), following the [FracMinHash](https://joss.theoj.org/papers/10.21105/joss.00027) methodology. Each sketch was created by selecting one in every thousand 31-mers using the command: `sourmash sketch dna -p dna,k=31,scaled=1000,abund file_to_sketch.fa -o sketch_file`.
 
-The FracMinHash sketch database is distributed as a compressed archive. See [the dedicated page](https://github.com/rolandfaure/fmh/) <!-- (https://github.com/adrita1999/Logan_metagenome_FMH_sketches_decompression) --> for instructions on downloading and decompressing the archive into individual `sourmash` `.sig` files.
+The FracMinHash sketch database is distributed as a compressed archive. See [the dedicated page](https://github.com/rolandfaure/FMH/FMH.md) <!-- (https://github.com/adrita1999/Logan_metagenome_FMH_sketches_decompression) --> for instructions on downloading and decompressing the archive into individual `sourmash` `.sig` files.
 
 ### Generating Your Own Sketch
 
