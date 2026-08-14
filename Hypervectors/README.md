@@ -66,12 +66,13 @@ The database is downloadable [here](https://drive.proton.me/urls/M9SG6CJ37W#IZz0
 
 ### Database Contents
 
-In the database, you will find four files:
+In the database, you will find five files:
 
 - **dimension.txt** — Contains a single number representing the dimension of the hypervectors (should be 2048)
 - **metadata.txt** — Contains the list of all accessions with their corresponding metadata
 - **vectors.bin** — Contains all the hypervectors in byte format. Each vector is a concatenation of 2048 int32 values. Each value is stored as an int for convenience but should be divided by sqrt(2048) when used. The file is the concatenation of the hypervectors in the order described in metadata.txt
 - **vector_norms.txt** — A TSV file containing the norm of all the hypervectors
+- **all_errors_confidence_interval_95.txt** — A file containing precomputed 95% confidence intervals
 
 **Note:** This is a temporary small database for testing purposes.
 
