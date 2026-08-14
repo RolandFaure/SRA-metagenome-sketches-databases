@@ -9,7 +9,7 @@ The similarity matrix is available here: [TODO: Add link to the database]
 
 ## Manipulating the Similarity Matrix
 
-### 🛠️ Installation Guide [TODO: all paths have changed]
+### 🛠️ Installation Guide [TODO: all paths have changed, this does not work anymore]
 
 Follow these steps to set up the necessary environment and build the executables.
 
@@ -18,8 +18,8 @@ Follow these steps to set up the necessary environment and build the executables
 Clone the repository and its submodules recursively:
 
 ```Shell
-git clone --recursive https://github.com/RolandFaure/metagenome_vector_sketches.git
-cd metagenome_vector_sketches
+git clone --recursive https://github.com/RolandFaure/SRA-sketches-database.git
+cd SRA-sketches-database/similarity_matrix
 git submodule update --init --recursive
 ```
 

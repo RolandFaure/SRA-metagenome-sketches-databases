@@ -1,6 +1,6 @@
 # SRA metagenomes FMH sketches
 
-[TODO: Add a tutorial on how to compare your sketch against the database using sourmash search: e.g. find which metagenomes contain a given species]
+[TODO (not urgent): Add a tutorial on how to compare your sketch against the database using sourmash search: e.g. find which metagenomes contain a given species]
 
 This page explains 
  - (How to download the Logan-FMH database)[#downloading-the-logan-fmh-database]
