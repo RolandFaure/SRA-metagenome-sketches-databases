@@ -65,9 +65,9 @@ target_link_libraries(pairwise_comp_optimized PRIVATE
     BITS
 )
 
-add_executable(update_vec
-    src/update_vector.cpp
-)
+# add_executable(update_vec
+#     src/update_vector.cpp
+# )
 
 
 add_library(pc_mat_cmp_lib STATIC src/read_pc_mat_cmp.cpp)

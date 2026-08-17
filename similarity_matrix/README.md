@@ -1,27 +1,12 @@
-# All-vs-all Similarity Matrix
+# 🧬Similarity Matrix
 
-This page explains how to download and manipulate the all-vs-all similarity matrix for all 4.8 million metagenomic datasets in Logan v1, including all datasets released on the SRA before December 2023. Similarity is defined as the Jaccard index between the 31-mers of each dataset's assembly. All similarity values above 0.2 are included in the matrix, as well as all similarity values above 0.05 within the limits of 10,000 neighbors per accession.
+This folder contains code for constructing similarity matrices from genomic data using hypervector sketches. These matrices support efficient similarity estimation and large-scale comparison of metagenomic datasets.
 
-More information about the construction of the similarity matrix can be found in the [metagenome_vector_sketches](https://github.com/RolandFaure/metagenome_vector_sketches) repository.
-
-## Downloading the Similarity Matrix
-The similarity matrix is available here: [TODO: Add link to the database]
-
-## Manipulating the Similarity Matrix
-
-### 🛠️ Installation Guide [TODO: all paths have changed, this does not work anymore]
+## 🛠️ Installation Guide
 
 Follow these steps to set up the necessary environment and build the executables.
 
-#### Setting up the Repository
-
-Clone the repository and its submodules recursively:
-
-```Shell
-git clone --recursive https://github.com/RolandFaure/SRA-sketches-database.git
-cd SRA-sketches-database/similarity_matrix
-git submodule update --init --recursive
-```
+### Setup
 
 You can use conda to install the dependencies:
 
@@ -31,7 +16,7 @@ conda activate mgs
 conda install -c conda-forge hdf5 h5py cmake
 ```
 
-#### Build the Executables
+### Build the Executables
 
 Create a build folder, and compile the C++ code using cmake. This step generates all necessary executables inside the build folder.
 
@@ -40,6 +25,72 @@ mkdir build
 cd build
 cmake ..      
 make -j 8
+```
+
+## 🚀 Usage Examples
+
+The following examples use the FracMinHash data (signature files) inside the `test/toy/` folder. All compiled executables are located inside the `build` folder.
+
+> **Tip:** Running any executable without arguments displays the complete command-line help.
+
+### Build the Vector Database
+
+Use `project_everything` to create projected vectors from FracMinHash data. 
+
+```shell
+Project FracMinHash Signatures to Vectors
+Usage:
+  Convert mode:
+    ./project_everything convert <signature_folder> <hash_file> [-t threads]
+      signature_folder : Path to folder containing signature files
+      hash_file        : Output hash file path
+      -t, --threads    : Number of threads (default: 1)
+
+  Sketch mode:
+    ./project_everything sketch <hash_file> <db_folder> [-t threads] [-d dimension] 
+      hash_file        : Input hash file path
+      db_folder        : Output folder for generated vector and auxiliary files
+      -t, --threads    : Number of threads (default: 1)
+      -d, --dimension  : Vector dimension (default: 2048)
+  Convert & Sketch mode:
+    ./project_everything build <signature_folder> <db_folder> [-t threads] [-d dimension]
+      signature_folder : Path to folder containing signature files
+      db_folder        : Output folder for generated vector and auxiliary files
+      -t, --threads    : Number of threads (default: 1)
+      -d, --dimension  : Vector dimension (default: 2048)
+```
+
+For example, to create and store vectors from the FracMinHash signature files inside the `test/toy/` folder to the folder (`toy_db/`):
+
+```Shell
+cd test/
+../build/project_everything build toy toy_db/ -t 8 -d 2048
+```
+
+### Compute Pairwise Comparison Matrix
+
+The `pairwise_comp_optimized` executable computes the similarity matrix among all vectors using the folder created from `project_everything` executable.
+
+```shell
+Create Pairwise Comparison Matrix
+
+Usage:
+        ./pairwise_comp_optimized --db <folder> --output_folder <folder> [--num_shards <int>]
+                                  [--max_memory_gb <float>] [--num_threads <int>] [--help]
+
+Options:
+  --db              Folder containing the matrix meta data [Required]
+  --output_folder   Folder where to store the matrix [Required]
+  --num_threads     Numer of threads to use [default 1]
+  --num_shards      Number of shards to use [default 1]
+  --max_memory_gb   Max memory to be used per thread [default 1 GB]
+  --help            Show this help message
+```
+
+For example, using the vector data inside the constructed `toy_db/` folder, one can create similarity matrix inside `toy_matrix` folder using:
+
+```Shell
+../build/pairwise_comp_optimized --db toy_db/ --output_folder toy_matrix/ --num_threads 2 --num_shards 4  --max_memory_gb 12 
 ```
 
 ### Query the Pairwise Matrix
@@ -62,8 +113,8 @@ Usage:
                        <int>] [--thread <int>] [--batch_size <int>] [--write_to_file <file>]
                        [--show_all] [--print] [--help]
 
-        ./query_pc_mat --matrix <folder> --db <folder> [--filter <double> [--out] <folder>] [--top
-                       <int>] [--thread <int>] [--batch_size <int>] [--write_to_file <file>]
+        ./query_pc_mat --matrix <folder> --db <folder> [--nf <uint64_t> <double> [--out] <folder>]
+                       [--top <int>] [--thread <int>] [--batch_size <int>] [--write_to_file <file>]
                        [--show_all] [--print] [--help]
 
 Options:
@@ -74,6 +125,7 @@ Options:
   --row_file      : File containing query row IDs (one per line)
   --col_file      : File containing query col IDs (one per line)
   --filter        : Filter values below threshold from matrix
+  --nf            : Filter matrix to include at least top N neighbors and all neighbors with Jaccard >= J
   --out           : Output folder for the filtered matrix
   --top           : Number of top jaccard values to show [default 10]
   --batch_size    : Number of queries to process per batch [default 1000]
@@ -87,8 +139,7 @@ Options:
 
 ```
 
-> **Note**: Batches are executed in parallel, up to the configured number of threads. Within each batch, queries are processed sequentially. The write phase for sliced queries is also performed sequentially.
-
+<!-- > **To query from all accessions inside the server, use `--matrix /scratch/mgs_project/matrix/ --db /scratch/mgs_project/db/`** -->
 
 Inside the `test` folder, there are three example query files (`query_samples.txt`, `row_samples.txt` and `col_samples.txt`) that will be used for the following examples.
 Three different kinds of queries are supported:
@@ -115,11 +166,13 @@ Here, use `*.h5` ([HDF5](https://www.hdfgroup.org/solutions/hdf5/)) as the outpu
 
 #### Filter Matrix
 
-Filter all accessions below a threshold from [0, 1] and write the corresponding matrix to a new location:
+This option (`--nf`) keeps at least top N neighbors, and for the remaining neighbors, filters everyone below a threshold from [0,1]. Then, writes the corresponding matrix to a new location. In the following example, we keep at least 20 neighbors for each accession, and for the remaining neighbors, filter everyone below Jaccard estimate of 0.2. We write the filtered matrix to `filtered_toy_matrix` directory:
 
 ```Shell
-../build/query_pc_mat --matrix toy_matrix --db toy_db/ --filter 0.2 --out filtered_toy_matrix --thread 2
+../build/query_pc_mat --matrix toy_matrix --db toy_db/ --nf 20 0.2 --out filtered_toy_matrix --thread 2
 ```
+
+> **Note**: Batches are executed in parallel, up to the configured number of threads. Within each batch, queries are processed sequentially. The write phase for sliced queries is also performed sequentially.
 
 ```
 Important Output Format Note:
