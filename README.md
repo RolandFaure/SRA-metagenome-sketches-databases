@@ -1,4 +1,4 @@
-# SRA Sketches Database
+# SRA Metagenome Sketches Database
 
 This repository provides access to and documentation for the sketch databases containing compressed representations of all metagenomic datasets in the SRA up to December 2023, based on [Logan v1](https://github.com/IndexThePlanet/Logan).
 
