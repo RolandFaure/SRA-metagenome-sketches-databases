@@ -59,7 +59,7 @@ target_include_directories(standalone_projection PRIVATE ${EIGEN_INCLUDE_DIR})
 
 add_executable(pairwise_comp_optimized
     src/pairwise_comp_optimized.cpp
-    src/pairwise_comp_optimized_16bits.cpp
+    # src/pairwise_comp_optimized_16bits.cpp
 )
 target_link_libraries(pairwise_comp_optimized PRIVATE 
     BITS

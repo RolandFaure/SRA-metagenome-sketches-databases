@@ -11,7 +11,7 @@
 
 //#include <immintrin.h>
 // Forward declaration instead of including .cpp file
-int pairwise_comp_optimized_16bits(std::string db_folder, int num_threads, std::string output_folder, int dimension, int num_shards,int shard_idx);
+// int pairwise_comp_optimized_16bits(std::string db_folder, int num_threads, std::string output_folder, int dimension, int num_shards,int shard_idx);
 #include "elias_fano.hpp"
 #include "clipp.h"
 #include "rice_sequence.hpp"
