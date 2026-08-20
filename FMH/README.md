@@ -28,7 +28,7 @@ cd SRA-metagenome-sketches-databases/FMH
 ## Decompression 
 
 ```bash
-./decompression_pipeline.sh <compressed_hashes.tar.xz> <output_directory>
+./decompression_pipeline.sh <compressed_hashes.tar.xz> <output_directory> [threads]
 ```
 
 ### Arguments
@@ -37,12 +37,21 @@ cd SRA-metagenome-sketches-databases/FMH
 |----------|-------------|
 | `compressed_hashes.tar.xz` | Path to the compressed FracMinHash sketch archive. |
 | `output_directory` | Directory where decompression outputs and reconstructed `.sig` files will be stored. |
+| `threads` | Optional number of threads to use during decompression. Default: `128`. |
 
 ## Example
+
+Using default number of threads:
 
 ```bash
 ./decompression_pipeline.sh compressed_hashes.tar.xz .
 ```
+Using custom number of threads:
+
+```bash
+./decompression_pipeline.sh compressed_hashes.tar.xz . 256
+```
+
 After successful completion, the reconstructed `.sig` files and the archived `VERSION` file are retained inside the decompression directory.
 ```text
 decompressed_sigs/

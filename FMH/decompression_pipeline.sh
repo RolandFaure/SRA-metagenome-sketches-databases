@@ -6,24 +6,33 @@ set -euo pipefail
 # ============================================================
 
 SUPPORTED_ARCHIVE_VERSION="1.0"
-THREADS=512
+DEFAULT_THREADS=128
+
+
+# ============================================================
+# HELP
+# ============================================================
 
 usage() {
     cat <<EOF
 Usage:
-    $(basename "$0") <compressed_archive.tar.xz> <output_directory>
+    $(basename "$0") <compressed_hashes.tar.xz> <output_directory> [threads]
 
 Description:
     Decompresses a versioned FracMinHash archive and reconstructs the
     original sourmash .sig files.
 
 Arguments:
-    compressed_archive.tar.xz
+    compressed_hashes.tar.xz
         Path to the compressed FracMinHash archive.
 
     output_directory
-        Directory where all decompression files and reconstructed
+        Directory where the decompressed_sigs directory and reconstructed
         .sig files will be stored.
+
+    threads
+        Number of threads to use for parallel decompression steps.
+        Optional. Default: $DEFAULT_THREADS
 
 Options:
     -h, --help
@@ -32,18 +41,25 @@ Options:
 Supported archive version:
     $SUPPORTED_ARCHIVE_VERSION
 
-Example:
-    $(basename "$0") compressed_hashes.tar.xz decompressed_sigs
+Examples:
+    $(basename "$0") compressed_hashes.tar.xz .
+
+    $(basename "$0") compressed_hashes.tar.xz . 256
 EOF
 }
+
+
+# ============================================================
+# PARSE ARGUMENTS
+# ============================================================
 
 if [[ $# -eq 1 && ( "$1" == "-h" || "$1" == "--help" ) ]]; then
     usage
     exit 0
 fi
 
-if [[ $# -ne 2 ]]; then
-    echo "ERROR: Expected an archive path and an output directory." >&2
+if [[ $# -lt 2 || $# -gt 3 ]]; then
+    echo "ERROR: Expected an archive path, an output directory, and optionally a thread count." >&2
     echo >&2
     usage >&2
     exit 1
@@ -51,6 +67,23 @@ fi
 
 XZ_EF_TOTAL_FILE="$1"
 DECOMP_DIR="$2"
+THREADS="${3:-$DEFAULT_THREADS}"
+
+
+# ============================================================
+# VALIDATE THREAD COUNT
+# ============================================================
+
+if ! [[ "$THREADS" =~ ^[1-9][0-9]*$ ]]; then
+    echo "ERROR: Thread count must be a positive integer." >&2
+    echo "Received: $THREADS" >&2
+    exit 1
+fi
+
+
+# ============================================================
+# VALIDATE INPUT ARCHIVE / OUTPUT DIRECTORY
+# ============================================================
 
 if [[ ! -f "$XZ_EF_TOTAL_FILE" ]]; then
     echo "ERROR: Archive does not exist:" >&2
@@ -77,6 +110,11 @@ if ! tar -tJf "$XZ_EF_TOTAL_FILE" >/dev/null 2>&1; then
     echo "  $XZ_EF_TOTAL_FILE" >&2
     exit 1
 fi
+
+echo "Archive:       $XZ_EF_TOTAL_FILE"
+echo "Output dir:    $DECOMP_DIR"
+echo "Threads:       $THREADS"
+echo
 
 # BASE="/scratch/logan_compression"
 # EF_BASE="$BASE/EF"
