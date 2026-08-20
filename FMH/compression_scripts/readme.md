@@ -58,27 +58,67 @@ Make the script executable:
 chmod +x compression_pipeline.sh
 ```
 
-Run it from the compression working directory:
+Run the compression pipeline using:
 
 ```bash
-./compression_pipeline.sh
+./compression_pipeline.sh <sketch_directory> <output_directory> <archive_name> [threads]
 ```
+
+### Arguments
+
+| Argument           | Description                                                                                   |
+| ------------------ | --------------------------------------------------------------------------------------------- |
+| `sketch_directory` | Directory containing the input FracMinHash `.sig` files.                                      |
+| `output_directory` | Directory where the compressed archive and compression summary will be saved.                 |
+| `archive_name`     | Name of the compressed archive. If `.tar.xz` is not provided, it will be added automatically. |
+| `threads`          | Optional number of threads to use. Default: `128`.                                            |
+
+### Example
+
+Using the default number of threads (`128`):
+
+```bash
+./compression_pipeline.sh ../toy . compressed_hashes
+```
+
+Using a custom number of threads:
+
+```bash
+./compression_pipeline.sh ../toy . compressed_hashes 256
+```
+
 ---
 
 # Compression Outputs
 
-## Final archive
+## Final Archive
+
+The compressed archive is saved in the specified output directory:
 
 ```text
-../compressed_hashes.tar.xz
+<output_directory>/<archive_name>.tar.xz
 ```
+
+For the example above:
+
+```text
+./compressed_hashes.tar.xz
+```
+
 ## Compression Summary
 
-The summary is printed to the terminal and written to:
+The compression summary is printed to the terminal and written to:
+
+```text
+<output_directory>/compression_summary.txt
+```
+
+For the example above:
 
 ```text
 ./compression_summary.txt
 ```
+
 ---
 
 
