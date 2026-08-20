@@ -28,6 +28,7 @@ cd SRA-metagenome-sketches-databases/FMH
 ## Decompression 
 
 ```bash
+chmod +x decompression_pipeline.sh
 ./decompression_pipeline.sh <compressed_hashes.tar.xz> <output_directory> [threads]
 ```
 

@@ -367,9 +367,7 @@ hash_u64_size=$(bytes_of_path "$HASH_TABLE_DIR")
 hash_ef_size=$(bytes_of_path "$HASH_TABLE_COMPRESSED_DIR")
 metadata_size=$(bytes_of_path "$METADATA_DIR")
 
-ef_meta_total_size=$(
-    (mins_ef_size + hash_ef_size + metadata_size)
-)
+ef_meta_total_size=$((mins_ef_size + hash_ef_size + metadata_size))
 
 ef_total_xz_size=$(bytes_of_path "$XZ_EF_TOTAL_FILE")
 
