@@ -450,28 +450,6 @@ void process_one_batch(const fs::path& batch_input_dir,
         t.join();
     }
 
-    // ============================================================
-    // OPTIONAL: write original .sig vs compressed EF size to summary file
-    // Comment out this block if you do not want batch-size reporting.
-    // ============================================================
-    {
-    fs::path report_file =
-        batch_output_dir.parent_path() / "batch_sig_vs_ef_sizes.tsv";
-
-    append_batch_size_report(
-        report_file,
-        batch_input_dir.filename().string(),
-        batch_sig_dir,
-        batch_output_dir,
-        ok_count.load(),
-        error_count.load()
-    );
-
-    std::cout << "Batch .sig vs EF size written to: "
-            << report_file
-            << "\n";
-    }
-    // ============================================================
 
     std::cout << "Batch done: " << batch_input_dir.filename().string()
               << " successful=" << ok_count.load()

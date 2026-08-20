@@ -17,7 +17,7 @@ The complete workflow is:
 Go to compression directory.
 
 ```bash
-cd FMH/compression_scripts
+cd compression_scripts
 ```
 
 Before running `compression_pipeline.sh`, run the global hash-table construction script `make_union_ht_v2.py`.
