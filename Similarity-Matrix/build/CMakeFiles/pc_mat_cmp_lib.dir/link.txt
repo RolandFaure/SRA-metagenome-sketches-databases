@@ -1,0 +1,2 @@
+/usr/bin/ar qc libpc_mat_cmp_lib.a CMakeFiles/pc_mat_cmp_lib.dir/src/read_pc_mat_cmp.cpp.o
+/usr/bin/ranlib libpc_mat_cmp_lib.a

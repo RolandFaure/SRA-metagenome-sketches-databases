@@ -1,8 +1,13 @@
-# 🧬Similarity Matrix
+# Similarity Matrix
 
 This folder contains code for constructing similarity matrices from genomic data using hypervector sketches. These matrices support efficient similarity estimation and large-scale comparison of metagenomic datasets.
 
-## 🛠️ Installation Guide
+## Downloading the Similarity Matrix
+
+The full similarity matrix can be downloaded from here: [link]()
+To download the filtered similarity matrix with at least `10,000` neighbors and all neighbors with `>= 0.2` Jaccard similarity, go to this [link](https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed), and download `matrix.tar.zst`
+
+## Installation Guide
 
 Follow these steps to set up the necessary environment and build the executables.
 

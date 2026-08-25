@@ -1,0 +1,1 @@
+/usr/bin/c++  -O3 -march=native -ffast-math -DNDEBUG -w -fopenmp CMakeFiles/standalone_projection.dir/src/standalone_projection.cpp.o CMakeFiles/standalone_projection.dir/src/random_projection.cpp.o -o standalone_projection 
