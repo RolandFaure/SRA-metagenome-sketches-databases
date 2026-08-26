@@ -1,2 +1,0 @@
-/usr/bin/ar qc libcnpy.a CMakeFiles/cnpy.dir/include/cnpy/cnpy.cpp.o
-/usr/bin/ranlib libcnpy.a

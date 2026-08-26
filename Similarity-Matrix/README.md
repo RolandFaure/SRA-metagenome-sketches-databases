@@ -34,97 +34,37 @@ make -j 8
 
 ## 🚀 Usage Examples
 
-The following examples use the FracMinHash data (signature files) inside the `test/toy/` folder. All compiled executables are located inside the `build` folder.
+The following examples use the example data inside the `test/` folder. All compiled executables are located inside the `build` folder.
 
 > **Tip:** Running any executable without arguments displays the complete command-line help.
 
-### Build the Vector Database
-
-Use `project_everything` to create projected vectors from FracMinHash data. 
-
-```shell
-Project FracMinHash Signatures to Vectors
-Usage:
-  Convert mode:
-    ./project_everything convert <signature_folder> <hash_file> [-t threads]
-      signature_folder : Path to folder containing signature files
-      hash_file        : Output hash file path
-      -t, --threads    : Number of threads (default: 1)
-
-  Sketch mode:
-    ./project_everything sketch <hash_file> <db_folder> [-t threads] [-d dimension] 
-      hash_file        : Input hash file path
-      db_folder        : Output folder for generated vector and auxiliary files
-      -t, --threads    : Number of threads (default: 1)
-      -d, --dimension  : Vector dimension (default: 2048)
-  Convert & Sketch mode:
-    ./project_everything build <signature_folder> <db_folder> [-t threads] [-d dimension]
-      signature_folder : Path to folder containing signature files
-      db_folder        : Output folder for generated vector and auxiliary files
-      -t, --threads    : Number of threads (default: 1)
-      -d, --dimension  : Vector dimension (default: 2048)
-```
-
-For example, to create and store vectors from the FracMinHash signature files inside the `test/toy/` folder to the folder (`toy_db/`):
-
-```Shell
-cd test/
-../build/project_everything build toy toy_db/ -t 8 -d 2048
-```
-
-### Compute Pairwise Comparison Matrix
-
-The `pairwise_comp_optimized` executable computes the similarity matrix among all vectors using the folder created from `project_everything` executable.
-
-```shell
-Create Pairwise Comparison Matrix
-
-Usage:
-        ./pairwise_comp_optimized --db <folder> --output_folder <folder> [--num_shards <int>]
-                                  [--max_memory_gb <float>] [--num_threads <int>] [--help]
-
-Options:
-  --db              Folder containing the matrix meta data [Required]
-  --output_folder   Folder where to store the matrix [Required]
-  --num_threads     Numer of threads to use [default 1]
-  --num_shards      Number of shards to use [default 1]
-  --max_memory_gb   Max memory to be used per thread [default 1 GB]
-  --help            Show this help message
-```
-
-For example, using the vector data inside the constructed `toy_db/` folder, one can create similarity matrix inside `toy_matrix` folder using:
-
-```Shell
-../build/pairwise_comp_optimized --db toy_db/ --output_folder toy_matrix/ --num_threads 2 --num_shards 4  --max_memory_gb 12 
-```
-
 ### Query the Pairwise Matrix
 
-The `query_pc_mat` executable allows you to query the computed similarity matrix.
+The `query` executable allows you to query the similarity matrix.
 
 ```Shell
 Query Pairwise Comparison Matrix
 
 Usage:
-        ./query_pc_mat --matrix <folder> --db <folder> [--query_file <file>] [--top <int>] [--thread
-                       <int>] [--batch_size <int>] [--write_to_file <file>] [--show_all] [--print]
-                       [--help]
+        ./build/query --matrix <folder> --db <folder> [--query_file <file>] [--top <int>] [--thread
+                      <int>] [--batch_size <int>] [--write_to_file <file>] [--show_all] [--print]
+                      [--help]
 
-        ./query_pc_mat --matrix <folder> --db <folder> [--query_ids <ids>...] [--top <int>]
-                       [--thread <int>] [--batch_size <int>] [--write_to_file <file>] [--show_all]
-                       [--print] [--help]
+        ./build/query --matrix <folder> --db <folder> [--query_ids <ids>...] [--top <int>] [--thread
+                      <int>] [--batch_size <int>] [--write_to_file <file>] [--show_all] [--print]
+                      [--help]
 
-        ./query_pc_mat --matrix <folder> --db <folder> [--row_file <row> [--col_file] <col>] [--top
-                       <int>] [--thread <int>] [--batch_size <int>] [--write_to_file <file>]
-                       [--show_all] [--print] [--help]
+        ./build/query --matrix <folder> --db <folder> [--row_file <row> [--col_file] <col>] [--top
+                      <int>] [--thread <int>] [--batch_size <int>] [--write_to_file <file>]
+                      [--show_all] [--print] [--help]
 
-        ./query_pc_mat --matrix <folder> --db <folder> [--nf <uint64_t> <double> [--out] <folder>]
-                       [--top <int>] [--thread <int>] [--batch_size <int>] [--write_to_file <file>]
-                       [--show_all] [--print] [--help]
+        ./build/query --matrix <folder> --db <folder> [--nf <uint64_t> <double> [--out] <folder>]
+                      [--top <int>] [--thread <int>] [--batch_size <int>] [--write_to_file <file>]
+                      [--show_all] [--print] [--help]
 
 Options:
   --matrix        : Folder containing the pairwise matrix files [Required]
-  --db            : Folder containing the matrix meta data [Required]
+  --db            : Folder containing the matrix metadata [Required]
   --query_file    : File containing query IDs (one per line)
   --query_ids     : Query IDs as command line arguments (identifiers separated by space)
   --row_file      : File containing query row IDs (one per line)
@@ -141,12 +81,12 @@ Options:
   --show_all      : Whether to show all neighbors instead of top N
   --print         : Whether to print the outputs to screen
   --help          : Show this help message
-
 ```
 
 <!-- > **To query from all accessions inside the server, use `--matrix /scratch/mgs_project/matrix/ --db /scratch/mgs_project/db/`** -->
 
 Inside the `test` folder, there are three example query files (`query_samples.txt`, `row_samples.txt` and `col_samples.txt`) that will be used for the following examples.
+The example matrix folder is `test/toy_matrix` and the example metadata folder is `test/toy_db`.
 Three different kinds of queries are supported:
 
 #### Regular Query (Nearest Neighbors)
@@ -179,9 +119,69 @@ This option (`--nf`) keeps at least top N neighbors, and for the remaining neigh
 
 > **Note**: Batches are executed in parallel, up to the configured number of threads. Within each batch, queries are processed sequentially. The write phase for sliced queries is also performed sequentially.
 
-```
+```txt
 Important Output Format Note:
     Regular Query: Output file must be *.csv, *.tsv, or *.txt.
 
     Sliced (Row-Col) Query: Output file must be *.csv, *.tsv, *.npy, *npz or *h5. *h5 gives the most compressed output.
+```
+
+### Build the Vector Database
+
+We also provide executables to generate the similarity matrix. To do that, at first, use `project_everything` to create projected vectors from FracMinHash data.
+
+```shell
+Project FracMinHash Signatures to Vectors
+Usage:
+  Convert mode:
+    ./project_everything convert <signature_folder> <hash_file> [-t threads]
+      signature_folder : Path to folder containing signature files
+      hash_file        : Output hash file path
+      -t, --threads    : Number of threads (default: 1)
+
+  Sketch mode:
+    ./project_everything sketch <hash_file> <db_folder> [-t threads] [-d dimension] 
+      hash_file        : Input hash file path
+      db_folder        : Output folder for generated vector and auxiliary files
+      -t, --threads    : Number of threads (default: 1)
+      -d, --dimension  : Vector dimension (default: 2048)
+  Convert & Sketch mode:
+    ./project_everything build <signature_folder> <db_folder> [-t threads] [-d dimension]
+      signature_folder : Path to folder containing signature files
+      db_folder        : Output folder for generated vector and auxiliary files
+      -t, --threads    : Number of threads (default: 1)
+      -d, --dimension  : Vector dimension (default: 2048)
+```
+
+For example, to create and store vectors from the FracMinHash signature files inside the `test/toy/` folder to the folder (`toy_db/`):
+
+```shell
+cd test/
+../build/project_everything build toy toy_db/ -t 8 -d 2048
+```
+
+### Compute Pairwise Comparison Matrix
+
+The `construct_matrix` executable computes the similarity matrix among all vectors using the folder created from `project_everything` executable.
+
+```shell
+Create Pairwise Comparison Matrix
+
+Usage:
+        ./construct_matrix --db <folder> --output_folder <folder> [--num_shards <int>]
+                           [--max_memory_gb <float>] [--num_threads <int>] [--help]
+
+Options:
+  --db              Folder containing the matrix metadata [Required]
+  --output_folder   Folder where to store the matrix [Required]
+  --num_shards      Number of shards to use [default 1]
+  --max_memory_gb   Max memory to be used per thread [default 1 GB]
+  --num_threads     Numer of threads to use [default 1]
+  --help            Show this help message
+```
+
+For example, using the vector data inside the constructed `toy_db/` folder, one can create similarity matrix inside `toy_matrix` folder using:
+
+```Shell
+../build/pairwise_comp_optimized --db toy_db/ --output_folder toy_matrix/ --num_threads 2 --num_shards 2  --max_memory_gb 12 
 ```

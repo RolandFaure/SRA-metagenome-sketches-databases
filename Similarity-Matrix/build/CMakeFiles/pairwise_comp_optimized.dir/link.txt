@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -march=native -ffast-math -DNDEBUG -w -fopenmp CMakeFiles/pairwise_comp_optimized.dir/src/pairwise_comp_optimized.cpp.o -o pairwise_comp_optimized 

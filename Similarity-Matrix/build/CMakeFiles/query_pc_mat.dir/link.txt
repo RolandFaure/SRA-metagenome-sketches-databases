@@ -1,1 +1,0 @@
-/usr/bin/c++  -O3 -march=native -ffast-math -DNDEBUG -w -fopenmp CMakeFiles/query_pc_mat.dir/src/query_pc_mat.cpp.o -o query_pc_mat  -Wl,-rpath,/home/grads/mqa6002/anaconda3/lib libpc_mat_cmp_lib.a libcnpy.a /usr/lib/x86_64-linux-gnu/libz.so /home/grads/mqa6002/anaconda3/lib/libhdf5.so.310.5.0 -ldl 

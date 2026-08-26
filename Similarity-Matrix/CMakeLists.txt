@@ -57,11 +57,10 @@ add_executable(standalone_projection
 )
 target_include_directories(standalone_projection PRIVATE ${EIGEN_INCLUDE_DIR})
 
-add_executable(pairwise_comp_optimized
-    src/pairwise_comp_optimized.cpp
-    # src/pairwise_comp_optimized_16bits.cpp
+add_executable(construct_matrix
+    src/construct_matrix.cpp
 )
-target_link_libraries(pairwise_comp_optimized PRIVATE 
+target_link_libraries(construct_matrix PRIVATE 
     BITS
 )
 
@@ -70,13 +69,13 @@ target_link_libraries(pairwise_comp_optimized PRIVATE
 # )
 
 
-add_library(pc_mat_cmp_lib STATIC src/read_pc_mat_cmp.cpp)
-set_target_properties(pc_mat_cmp_lib PROPERTIES POSITION_INDEPENDENT_CODE ON)
-target_include_directories(pc_mat_cmp_lib PUBLIC 
+add_library(read_matrix_lib STATIC src/read_matrix.cpp)
+set_target_properties(read_matrix_lib PROPERTIES POSITION_INDEPENDENT_CODE ON)
+target_include_directories(read_matrix_lib PUBLIC 
     ${CMAKE_SOURCE_DIR}/bits/include/
     ${CMAKE_SOURCE_DIR}/bits/external/essentials/include/
 )
-target_link_libraries(pc_mat_cmp_lib PUBLIC 
+target_link_libraries(read_matrix_lib PUBLIC 
     BITS
 )
 
@@ -86,15 +85,15 @@ target_link_libraries(pc_mat_cmp_lib PUBLIC
 # target_link_libraries(query_pc_mat PRIVATE pc_mat_lib cnpy)
 
 
-add_executable(query_pc_mat
-    src/query_pc_mat.cpp
+add_executable(query
+    src/query.cpp
 )
-target_link_libraries(query_pc_mat PRIVATE pc_mat_cmp_lib cnpy HighFive)
+target_link_libraries(query PRIVATE read_matrix_lib cnpy HighFive)
 
 
 # ==== Optional Clean target ====
 add_custom_target(clean-all
     COMMAND ${CMAKE_BUILD_TOOL} clean
-    COMMAND ${CMAKE_COMMAND} -E rm -f project_everything standalone_projection pairwise_comp_optimized query_ava_matrix query_pc_mat 
+    COMMAND ${CMAKE_COMMAND} -E rm -f project_everything standalone_projection construct_matrix query
 )
 
