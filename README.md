@@ -36,7 +36,7 @@ See [the dedicated folder](Hypervectors/) for instructions on creating a sketch 
 
 An all-vs-all similarity matrix has been computed for all 4.8 million metagenomic datasets. Similarity is defined as the Jaccard index between the 31-mers of each dataset's assembly. All similarity values above 0.2 are included in the matrix, as well as all similarity values above 0.05 within the limits of 10,000 neighbors per accession.
 
-See [the dedicated folder](similarity_matrix/) for instructions on downloading and querying the similarity matrix.
+See [the dedicated folder](Similarity-Matrix/) for instructions on downloading and querying the similarity matrix.
 
 ## Citation
 
