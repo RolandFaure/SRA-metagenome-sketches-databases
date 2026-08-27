@@ -40,7 +40,7 @@ cmake ..
 make -j 8
 ```
 
-## 🚀 Usage Examples
+## Usage Examples
 
 The following examples use the example data inside the `test/` folder. All compiled executables are located inside the `build` folder.
 
