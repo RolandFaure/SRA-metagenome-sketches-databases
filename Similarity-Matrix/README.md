@@ -4,8 +4,16 @@ This folder contains code for constructing similarity matrices from genomic data
 
 ## Downloading the Similarity Matrix
 
-The full similarity matrix can be downloaded from here: [link]()
-To download the filtered similarity matrix with at least `10,000` neighbors and all neighbors with `>= 0.2` Jaccard similarity, go to this [link](https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed), and download `matrix.tar.zst`
+To download the full similarity matrix:
+```bash
+wget https://g-bb0f1.ffdaa9.e229.data.globus.org/matrix.tar.zst
+```
+
+To download the filtered similarity matrix, which retains at least `10,000` neighbors as well as all neighbors with Jaccard similarity `>= 0.2`, visit this [ScholarSphere resource](https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed), and download `matrix.tar.zst`.
+The filtered matrix can also be downloaded directly:
+```bash
+wget https://g-3887d.ffdaa9.e229.data.globus.org/matrix.tar.zst
+```
 
 ## Installation Guide
 
@@ -91,10 +99,10 @@ Three different kinds of queries are supported:
 
 #### Regular Query (Nearest Neighbors)
 
-Query the constructed matrix, `toy_matrix` for neighbors of specific IDs listed in a file (`query_samples.txt`):
+Query the example matrix, `toy_matrix` for neighbors of specific IDs listed in a file (`query_samples.txt`):
 
 ```Shell
-../build/query_pc_mat --matrix toy_matrix --db toy_db/ --query_file query_samples.txt --write_to_file toy_neighbors.txt --batch_size 5 --thread 2 --show_all
+../build/query --matrix toy_matrix --db toy_db/ --query_file query_samples.txt --write_to_file toy_neighbors.txt --batch_size 5 --thread 2 --show_all
 ```
 
 This command outputs one file per query ID (e.g., `DRR000821_toy_neighbors.txt`) containing all neighbors, as `--show_all` is specified.
@@ -104,7 +112,7 @@ This command outputs one file per query ID (e.g., `DRR000821_toy_neighbors.txt`)
 Create a slice of the matrix (a sub-matrix) from specificed IDs in a row file (`row_samples.txt`) and a column file (`col_samples.txt`):
 
 ```Shell
-../build/query_pc_mat --matrix toy_matrix --db toy_db/  --row_file row_samples.txt --col_file col_samples.txt --write_to_file row_col.h5 --batch_size 5 --thread 2
+../build/query --matrix toy_matrix --db toy_db/  --row_file row_samples.txt --col_file col_samples.txt --write_to_file row_col.h5 --batch_size 5 --thread 2
 ```
 
 Here, use `*.h5` ([HDF5](https://www.hdfgroup.org/solutions/hdf5/)) as the output format to get the most compressed output. This format can be accessed conveniently in Python using the [h5py](https://docs.h5py.org/en/stable/) library.
@@ -114,7 +122,7 @@ Here, use `*.h5` ([HDF5](https://www.hdfgroup.org/solutions/hdf5/)) as the outpu
 This option (`--nf`) keeps at least top N neighbors, and for the remaining neighbors, filters everyone below a threshold from [0,1]. Then, writes the corresponding matrix to a new location. In the following example, we keep at least 20 neighbors for each accession, and for the remaining neighbors, filter everyone below Jaccard estimate of 0.2. We write the filtered matrix to `filtered_toy_matrix` directory:
 
 ```Shell
-../build/query_pc_mat --matrix toy_matrix --db toy_db/ --nf 20 0.2 --out filtered_toy_matrix --thread 2
+../build/query --matrix toy_matrix --db toy_db/ --nf 20 0.2 --out filtered_toy_matrix --thread 2
 ```
 
 > **Note**: Batches are executed in parallel, up to the configured number of threads. Within each batch, queries are processed sequentially. The write phase for sliced queries is also performed sequentially.
@@ -183,5 +191,5 @@ Options:
 For example, using the vector data inside the constructed `toy_db/` folder, one can create similarity matrix inside `toy_matrix` folder using:
 
 ```Shell
-../build/pairwise_comp_optimized --db toy_db/ --output_folder toy_matrix/ --num_threads 2 --num_shards 2  --max_memory_gb 12 
+../build/construct_matrix --db toy_db/ --output_folder toy_matrix/ --num_threads 2 --num_shards 2  --max_memory_gb 12 
 ```
