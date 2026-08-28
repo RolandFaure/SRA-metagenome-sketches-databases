@@ -15,6 +15,11 @@ The filtered matrix can also be downloaded directly:
 wget https://g-3887d.ffdaa9.e229.data.globus.org/matrix.tar.zst
 ```
 
+To decompress the downloaded file, use
+```bash
+./src/decompress_matrix.sh matrix.tar.zst matrix_decompressed/
+```
+
 ## Installation Guide
 
 Follow these steps to set up the necessary environment and build the executables.
