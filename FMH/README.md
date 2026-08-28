@@ -2,7 +2,11 @@
 
 ## Downloading the Logan-FMH database
 
-The database is available here: [TODO: Add link to the database]
+You can download the FMH sketches from a public Globus guest collection using:
+
+```bash
+wget https://g-77cfc.ffdaa9.e229.data.globus.org/compressed_hashes.tar.xz
+```
 
 ## Decompressing the archive
 
