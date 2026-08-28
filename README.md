@@ -12,7 +12,7 @@ The two sketching methods provided are:
 
 Additionally, we provide an all-vs-all similarity matrix for all 4.8 million datasets, where similarity is defined as the Jaccard index between the 31-mer sets of the Logan assemblies. See [all-vs-all similarity matrix](#all-vs-all-similarity-matrix) section.
 
-The metadata associated with all the metagenomes in the database is available here [TODO].
+The metadata associated with all the metagenomes in the database is available here https://doi.org/10.5281/zenodo.22007258.
 
 ## FracMinHashes
 
