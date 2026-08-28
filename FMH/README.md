@@ -92,5 +92,3 @@ The scripts used to validate the reconstructed signatures through unit testing a
 The toy dataset can be used to test the complete workflow by compressing the original signatures, decompressing the generated archive, and comparing the reconstructed signatures against the original toy signatures using the unit-testing script.
 
 
-[TODO (not urgent): Add a tutorial on how to compare your sketch against the database using sourmash search: e.g. find which metagenomes contain a given species]
-
