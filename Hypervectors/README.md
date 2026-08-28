@@ -3,11 +3,25 @@
 This repository provides the database containing the hypervector sketches of all metagenomic accession of the SRA before December 2023, and the code needed to interact with it. You can directly interact with the database through the [similarity.logan-search.org](similarity.logan-search.org) website or you can download it locally (~50GB). The fundamental property of hypervectors is that the dot product between the hypervectors of datasets A and B is on average the size of their intersection.
 
 This repository contains scripts and tutorials for interacting with the database. Specifically, it includes:
-
-- [Scripts to sketch your own datasets](#creating-hypervectors-from-custom-datasets)
 - [Instructions to download the hypervector database locally](#database-download)
+- [Scripts to sketch your own datasets](#creating-hypervectors-from-custom-datasets)
 - [Tools to compare locally sketched datasets against all SRA datasets](#comparing-datasets-against-the-database)
 
+## Database Download
+
+The database is downloadable [here](https://drive.proton.me/urls/M9SG6CJ37W#IZz0B0LoLvX8) (https://drive.proton.me/urls/M9SG6CJ37W#IZz0B0LoLvX8):
+
+### Database Contents
+
+In the database, you will find five files:
+
+- **dimension.txt** — Contains a single number representing the dimension of the hypervectors (should be 2048)
+- **metadata.txt** — Contains the list of all accessions with their corresponding metadata
+- **vectors.bin** — Contains all the hypervectors in byte format. Each vector is a concatenation of 2048 int32 values. Each value is stored as an int for convenience but should be divided by sqrt(2048) when used. The file is the concatenation of the hypervectors in the order described in metadata.txt
+- **vector_norms.txt** — A TSV file containing the norm of all the hypervectors
+- **all_errors_confidence_interval_95.txt** — A file containing precomputed 95% confidence intervals
+
+**Note:** This is a temporary small database for testing purposes.
 ## Creating hypervectors from custom datasets
 
 ### Installation
@@ -59,22 +73,6 @@ The input file can be a fasta or fastq file, optionally gzipped. The output is a
 #### Output Format
 
 The `.bin` file contains a byte-packed vector where each value is stored as an int32. Values should be divided by sqrt(d) before local usage or uploaded as such on similarity.logan-search.org and in other commands of this tool suite.
-
-## Database Download
-
-The database is downloadable [here](https://drive.proton.me/urls/M9SG6CJ37W#IZz0B0LoLvX8) (https://drive.proton.me/urls/M9SG6CJ37W#IZz0B0LoLvX8):
-
-### Database Contents
-
-In the database, you will find five files:
-
-- **dimension.txt** — Contains a single number representing the dimension of the hypervectors (should be 2048)
-- **metadata.txt** — Contains the list of all accessions with their corresponding metadata
-- **vectors.bin** — Contains all the hypervectors in byte format. Each vector is a concatenation of 2048 int32 values. Each value is stored as an int for convenience but should be divided by sqrt(2048) when used. The file is the concatenation of the hypervectors in the order described in metadata.txt
-- **vector_norms.txt** — A TSV file containing the norm of all the hypervectors
-- **all_errors_confidence_interval_95.txt** — A file containing precomputed 95% confidence intervals
-
-**Note:** This is a temporary small database for testing purposes.
 
 ### Comparing Datasets Against the Database
 
