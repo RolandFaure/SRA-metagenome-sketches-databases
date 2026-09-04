@@ -10,9 +10,9 @@ The two sketching methods provided are:
 - **FracMinHash** – See the [FracMinHashes](#fracminhashes) section
 - **Hypervectors** – See the [Hypervectors](#hypervectors) section
 
-Additionally, we provide an all-vs-all similarity matrix for all 4.8 million datasets, where similarity is defined as the Jaccard index between the 31-mer sets of the Logan assemblies. See [all-vs-all similarity matrix](#all-vs-all-similarity-matrix) section.
+Additionally, we provide an all-vs-all similarity matrix for all 4.8 million datasets, where similarity is defined as the Jaccard index between the 31-mer sets of the Logan assemblies. See the [all-vs-all similarity matrix](#all-vs-all-similarity-matrix) section.
 
-The metadata associated with all the metagenomes in the database is available here https://doi.org/10.5281/zenodo.22007258.
+The metadata associated with all the metagenomes in the database is available here: https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed.
 
 ## FracMinHashes
 
@@ -25,9 +25,9 @@ The FracMinHash sketch database is distributed as a compressed archive. See [the
 
 Hypervectors represent each dataset as a fixed-dimensional 2048-element vector.
 
-The key property of hypervectors is that the scalar product of two dataset sketches provides an unbiased estimate of the intersection size of their 31-mer sets, scaled in our case by the factor 1000/2048. For a comprehensive understanding of hypervector methodology, limitations, and approximation characteristics, please refer to the our paper [TODO: Add citation to ourselves].
+The key property of hypervectors is that the scalar product of two dataset sketches provides an unbiased estimate of the intersection size of their 31-mer sets, scaled in our case by the factor 1000/2048. For a comprehensive understanding of hypervector methodology, limitations, and approximation characteristics, please refer to the paper [TODO: Add citation to ourselves].
 
-Hypervectors allow to very efficiently search through all the 4.8 million indexed metagenomes by Jaccard similarity. This can be done either by downloading the hypervector database and querying it locally, or by using the online service at [similarity.logan-search.org](https://similarity.logan-search.org).
+ Hypervectors allow users to search efficiently through all 4.8 million indexed metagenomes by Jaccard similarity. This can be done either by downloading the hypervector database and querying it locally, or by using the online service at [similarity.logan-search.org](https://similarity.logan-search.org).
 
 See [the dedicated folder](Hypervectors/) for instructions on creating a sketch from your own data, and downloading and manipulating the hypervector database locally.
 
