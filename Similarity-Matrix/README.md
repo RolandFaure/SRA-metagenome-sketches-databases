@@ -9,7 +9,7 @@ To download the full similarity matrix:
 wget https://g-bb0f1.ffdaa9.e229.data.globus.org/matrix.tar.zst
 ```
 
-To download the filtered similarity matrix, which retains at least `10,000` neighbors as well as all neighbors with Jaccard similarity `>= 0.2`, visit this [ScholarSphere resource](https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed), and download `matrix.tar.zst`.
+To download the filtered similarity matrix, which retains at least `10,000` neighbors as well as all neighbors with Jaccard similarity `>= 0.2`, visit this [ScholarSphere resource](https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed) and download `matrix.tar.zst`.
 The filtered matrix can also be downloaded directly:
 ```bash
 wget https://g-3887d.ffdaa9.e229.data.globus.org/matrix.tar.zst
@@ -189,7 +189,7 @@ Options:
   --output_folder   Folder where to store the matrix [Required]
   --num_shards      Number of shards to use [default 1]
   --max_memory_gb   Max memory to be used per thread [default 1 GB]
-  --num_threads     Numer of threads to use [default 1]
+  --num_threads     Number of threads to use [default 1]
   --help            Show this help message
 ```
 
