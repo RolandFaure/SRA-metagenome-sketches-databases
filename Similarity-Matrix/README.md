@@ -36,7 +36,7 @@ conda install -c conda-forge hdf5 h5py cmake
 
 ### Build the Executables
 
-Create a build folder, and compile the C++ code using cmake. This step generates all necessary executables inside the build folder.
+Create a build folder and compile the C++ code using CMake. This step generates all necessary executables inside the build folder.
 
 ```Shell
 mkdir build
@@ -85,7 +85,7 @@ Options:
   --filter        : Filter values below threshold from matrix
   --nf            : Filter matrix to include at least top N neighbors and all neighbors with Jaccard >= J
   --out           : Output folder for the filtered matrix
-  --top           : Number of top jaccard values to show [default 10]
+  --top           : Number of top Jaccard values to show [default 10]
   --batch_size    : Number of queries to process per batch [default 1000]
   --thread        : Number of threads to use [default 1]
   --write_to_file : Where to save the output. Expected format: 
@@ -98,13 +98,13 @@ Options:
 
 <!-- > **To query from all accessions inside the server, use `--matrix /scratch/mgs_project/matrix/ --db /scratch/mgs_project/db/`** -->
 
-Inside the `test` folder, there are three example query files (`query_samples.txt`, `row_samples.txt` and `col_samples.txt`) that will be used for the following examples.
-The example matrix folder is `test/toy_matrix` and the example metadata folder is `test/toy_db`.
+Inside the `test` folder, there are three example query files (`query_samples.txt`, `row_samples.txt`, and `col_samples.txt`) that will be used for the following examples.
+The example matrix folder is `test/toy_matrix`, and the example metadata folder is `test/toy_db`.
 Three different kinds of queries are supported:
 
 #### Regular Query (Nearest Neighbors)
 
-Query the example matrix, `toy_matrix` for neighbors of specific IDs listed in a file (`query_samples.txt`):
+Query the example matrix, `toy_matrix`, for neighbors of specific IDs listed in a file (`query_samples.txt`):
 
 ```Shell
 ../build/query --matrix toy_matrix --db toy_db/ --query_file query_samples.txt --write_to_file toy_neighbors.txt --batch_size 5 --thread 2 --show_all
@@ -114,7 +114,7 @@ This command outputs one file per query ID (e.g., `DRR000821_toy_neighbors.txt`)
 
 #### Sliced Matrix Query (Sub-matrix)
 
-Create a slice of the matrix (a sub-matrix) from specificed IDs in a row file (`row_samples.txt`) and a column file (`col_samples.txt`):
+Create a slice of the matrix (a sub-matrix) from specified IDs in a row file (`row_samples.txt`) and a column file (`col_samples.txt`):
 
 ```Shell
 ../build/query --matrix toy_matrix --db toy_db/  --row_file row_samples.txt --col_file col_samples.txt --write_to_file row_col.h5 --batch_size 5 --thread 2
@@ -124,7 +124,7 @@ Here, use `*.h5` ([HDF5](https://www.hdfgroup.org/solutions/hdf5/)) as the outpu
 
 #### Filter Matrix
 
-This option (`--nf`) keeps at least top N neighbors, and for the remaining neighbors, filters everyone below a threshold from [0,1]. Then, writes the corresponding matrix to a new location. In the following example, we keep at least 20 neighbors for each accession, and for the remaining neighbors, filter everyone below Jaccard estimate of 0.2. We write the filtered matrix to `filtered_toy_matrix` directory:
+This option (`--nf`) keeps at least top N neighbors, and for the remaining neighbors, filters everyone below a threshold from [0,1]. Then, writes the corresponding matrix to a new location. In the following example, we keep at least 20 neighbors for each accession, and for the remaining neighbors, filter everyone below a Jaccard estimate of 0.2. We write the filtered matrix to `filtered_toy_matrix` directory:
 
 ```Shell
 ../build/query --matrix toy_matrix --db toy_db/ --nf 20 0.2 --out filtered_toy_matrix --thread 2
@@ -141,7 +141,7 @@ Important Output Format Note:
 
 ### Build the Vector Database
 
-We also provide executables to generate the similarity matrix. To do that, at first, use `project_everything` to create projected vectors from FracMinHash data.
+We also provide executables to generate the similarity matrix. To do that, first, use `project_everything` to create projected vectors from FracMinHash data.
 
 ```shell
 Project FracMinHash Signatures to Vectors
@@ -175,7 +175,7 @@ cd test/
 
 ### Compute Pairwise Comparison Matrix
 
-The `construct_matrix` executable computes the similarity matrix among all vectors using the folder created from `project_everything` executable.
+The `construct_matrix` executable computes the similarity matrix among all vectors using the folder created by the `project_everything` executable.
 
 ```shell
 Create Pairwise Comparison Matrix
@@ -193,7 +193,7 @@ Options:
   --help            Show this help message
 ```
 
-For example, using the vector data inside the constructed `toy_db/` folder, one can create similarity matrix inside `toy_matrix` folder using:
+For example, using the vector data inside the constructed `toy_db/` folder, one can create a similarity matrix inside `toy_matrix` folder using:
 
 ```Shell
 ../build/construct_matrix --db toy_db/ --output_folder toy_matrix/ --num_threads 2 --num_shards 2  --max_memory_gb 12 

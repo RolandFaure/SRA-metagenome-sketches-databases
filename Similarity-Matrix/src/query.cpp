@@ -806,7 +806,7 @@ int main(int argc, char* argv[]) {
         cout << "  --filter        : Filter values below threshold from matrix\n";
         cout << "  --nf            : Filter matrix to include at least top N neighbors and all neighbors with Jaccard >= J\n";
         cout << "  --out           : Output folder for the filtered matrix\n";
-        cout << "  --top           : Number of top jaccard values to show [default 10]\n";
+        cout << "  --top           : Number of top Jaccard values to show [default 10]\n";
         cout << "  --batch_size    : Number of queries to process per batch [default 1000]\n";
         cout << "  --thread        : Number of threads to use [default 1]\n";
         cout << "  --write_to_file : Where to save the output. Expected format: \n"
