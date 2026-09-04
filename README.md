@@ -27,7 +27,7 @@ Hypervectors represent each dataset as a fixed-dimensional 2048-element vector.
 
 The key property of hypervectors is that the scalar product of two dataset sketches provides an unbiased estimate of the intersection size of their 31-mer sets, scaled in our case by the factor 1000/2048. For a comprehensive understanding of hypervector methodology, limitations, and approximation characteristics, please refer to the our paper [TODO: Add citation to ourselves].
 
-Hypervectors allow to very efficiently search through all the 4.8 million indexed metagenomes by Jaccard similarity. This can be done either by downloading the hypervector database and querying it locally, or by using the online service at [similarity.logan-search.org](https://similarity.logan-search.org).
+ Hypervectors allow users to search efficiently through all 4.8 million indexed metagenomes by Jaccard similarity. This can be done either by downloading the hypervector database and querying it locally, or by using the online service at [similarity.logan-search.org](https://similarity.logan-search.org).
 
 See [the dedicated folder](Hypervectors/) for instructions on creating a sketch from your own data, and downloading and manipulating the hypervector database locally.
 
