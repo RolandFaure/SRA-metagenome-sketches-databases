@@ -9,7 +9,10 @@ This repository contains scripts and tutorials for interacting with the database
 
 ## Database Download
 
-The database is downloadable [here](https://drive.proton.me/urls/M9SG6CJ37W#IZz0B0LoLvX8) (https://drive.proton.me/urls/M9SG6CJ37W#IZz0B0LoLvX8):
+The database is available on AWS and downloadable:
+```
+wget https://s3.amazonaws.com/logan-pub/paper/fracminhash/hypervectors_db.tar.xz
+```
 
 ### Database Contents
 
