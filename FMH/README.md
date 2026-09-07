@@ -2,10 +2,14 @@
 
 ## Downloading the Logan-FMH database
 
-You can download the compressed FMH sketches from a public Globus guest collection using:
+You can download the compressed FMH sketches either from a public Globus guest collection or from AWS using:
 
 ```bash
-wget https://g-77cfc.ffdaa9.e229.data.globus.org/compressed_hashes.tar.xz
+wget https://g-77cfc.ffdaa9.e229.data.globus.org/compressed_hashes.tar.xz #Globus
+#or
+aws s3 cp s3://logan-pub/paper/fracminhash/fracminhash_db.tar.xz . #AWS
+#or
+wget https://s3.amazonaws.com/logan-pub/paper/fracminhash/fracminhash_db.tar.xz
 ```
 
 ## Decompressing the archive
