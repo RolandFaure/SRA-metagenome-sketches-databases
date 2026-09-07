@@ -40,4 +40,4 @@ See [the dedicated folder](Similarity-Matrix/) for instructions on downloading a
 
 ## Citation
 
-[TODO]
+This work will soon be deposited on biorxiv. In the meantime, if you wish to cite this work, please contact us directly.
