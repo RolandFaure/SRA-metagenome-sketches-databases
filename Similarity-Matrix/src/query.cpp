@@ -803,7 +803,7 @@ int main(int argc, char* argv[]) {
         cout << "  --query_ids     : Query IDs as command line arguments (identifiers separated by space)\n";
         cout << "  --row_file      : File containing query row IDs (one per line)\n";
         cout << "  --col_file      : File containing query col IDs (one per line)\n";
-        cout << "  --filter        : Filter values below threshold from matrix\n";
+        // cout << "  --filter        : Filter values below threshold from matrix\n";
         cout << "  --nf            : Filter matrix to include at least top N neighbors and all neighbors with Jaccard >= J\n";
         cout << "  --out           : Output folder for the filtered matrix\n";
         cout << "  --top           : Number of top Jaccard values to show [default 10]\n";

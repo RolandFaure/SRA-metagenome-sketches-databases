@@ -17,7 +17,7 @@ wget https://g-3887d.ffdaa9.e229.data.globus.org/matrix.tar.zst
 
 To decompress the downloaded file, use
 ```bash
-./src/decompress_matrix.sh matrix.tar.zst matrix_decompressed/
+./src/decompress.sh matrix.tar.zst matrix_decompressed/
 ```
 
 ## Installation Guide
@@ -82,7 +82,6 @@ Options:
   --query_ids     : Query IDs as command line arguments (identifiers separated by space)
   --row_file      : File containing query row IDs (one per line)
   --col_file      : File containing query col IDs (one per line)
-  --filter        : Filter values below threshold from matrix
   --nf            : Filter matrix to include at least top N neighbors and all neighbors with Jaccard >= J
   --out           : Output folder for the filtered matrix
   --top           : Number of top Jaccard values to show [default 10]

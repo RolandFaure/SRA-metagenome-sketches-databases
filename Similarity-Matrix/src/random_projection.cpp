@@ -5,6 +5,7 @@
 #include <sstream>
 #include <vector>
 #include <string>
+#include <cstdint>
 
 VectorXi transform_set_into_vector(const std::unordered_set<unsigned long int> &hashes, int d){
     int spacing_seed_factor = int(d / 64);
