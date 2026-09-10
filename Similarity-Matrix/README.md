@@ -4,20 +4,28 @@ This folder contains code for constructing similarity matrices from genomic data
 
 ## Downloading the Similarity Matrix
 
-To download the full similarity matrix:
+To download the full similarity matrix (842 GB compressed):
 ```bash
 wget https://g-bb0f1.ffdaa9.e229.data.globus.org/matrix.tar.zst
 ```
 
-To download the filtered similarity matrix, which retains at least `10,000` neighbors as well as all neighbors with Jaccard similarity `>= 0.2`, visit this [ScholarSphere resource](https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed) and download `matrix.tar.zst`.
-The filtered matrix can also be downloaded directly:
+The filtered similarity matrix (64 GB compressed, 90 GB extracted) is a smaller alternative. For each accession, it retains all neighbors with Jaccard similarity `>= 0.2`, as well as the closest remaining neighbors, within the limit of `10,000` neighbors per accession. Accessions with fewer neighbors than this limit retain all of them, and in practice no pair with a similarity below approximately 0.05 is stored. It is available from this [ScholarSphere resource](https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed), which provides `matrix.tar.zst` through a browser, or directly with:
+
 ```bash
 wget https://g-3887d.ffdaa9.e229.data.globus.org/matrix.tar.zst
 ```
 
-To decompress the downloaded file, use
+To decompress the downloaded file, use the `decompress.sh` script provided in `src` folder. It requires [zstd](https://github.com/facebook/zstd) and `tar` to be available on the `PATH`.
 ```bash
 ./src/decompress.sh matrix.tar.zst matrix_decompressed/
+```
+
+Decompression produces two folders, corresponding to the two folder arguments expected by the `query` executable:
+
+```text
+matrix_decompressed/
+    ├── db/       # pass this to --db
+    └── matrix/   # pass this to --matrix
 ```
 
 ## Installation Guide
@@ -26,19 +34,23 @@ Follow these steps to set up the necessary environment and build the executables
 
 ### Setup
 
-You can use conda to install the dependencies:
+You can use conda to install the dependencies. `cxx-compiler` provides the C++17 toolchain and OpenMP support, `zlib` and `hdf5` are linked by the executables, `zstd` is required by `src/decompress.sh`, and `h5py` is required only for reading `.h5` query output in Python.
 
 ```shell
 conda create -n mgs python=3.12
 conda activate mgs
-conda install -c conda-forge hdf5 h5py cmake
+conda install -c conda-forge cxx-compiler make cmake zlib zstd hdf5 h5py
 ```
+
+All remaining dependencies, including Eigen, cnpy, HighFive, and the bits library, are included in this folder, so no submodules need to be initialized.
 
 ### Build the Executables
 
-Create a build folder and compile the C++ code using CMake. This step generates all necessary executables inside the build folder.
+Clone the repository, enter this folder, then create a build folder and compile the C++ code using CMake. This step generates all necessary executables inside the build folder.
 
 ```Shell
+git clone https://github.com/RolandFaure/SRA-metagenome-sketches-databases.git
+cd SRA-metagenome-sketches-databases/Similarity-Matrix
 mkdir build
 cd build
 cmake ..      
@@ -99,6 +111,13 @@ Options:
 
 Inside the `test` folder, there are three example query files (`query_samples.txt`, `row_samples.txt`, and `col_samples.txt`) that will be used for the following examples.
 The example matrix folder is `test/toy_matrix`, and the example metadata folder is `test/toy_db`.
+
+The commands below are intended to be run from inside the `test` folder:
+
+```Shell
+cd ../test
+```
+
 Three different kinds of queries are supported:
 
 #### Regular Query (Nearest Neighbors)
@@ -165,12 +184,13 @@ Usage:
       -d, --dimension  : Vector dimension (default: 2048)
 ```
 
-For example, to create and store vectors from the FracMinHash signature files inside the `test/toy/` folder to the folder (`toy_db/`):
+For example, from the `test` folder, to create and store vectors from the FracMinHash signature files inside the `toy/` folder to a new folder (`my_toy_db/`):
 
 ```shell
-cd test/
-../build/project_everything build toy toy_db/ -t 8 -d 2048
+../build/project_everything build toy my_toy_db/ -t 8 -d 2048
 ```
+
+Note that the output is written to a new folder rather than to `toy_db/`, which is included in the repository and used by the query examples above.
 
 ### Compute Pairwise Comparison Matrix
 
@@ -192,8 +212,10 @@ Options:
   --help            Show this help message
 ```
 
-For example, using the vector data inside the constructed `toy_db/` folder, one can create a similarity matrix inside `toy_matrix` folder using:
+For example, using the vector data inside the `my_toy_db/` folder constructed in the previous step, one can create a similarity matrix inside a `my_toy_matrix` folder using:
 
 ```Shell
-../build/construct_matrix --db toy_db/ --output_folder toy_matrix/ --num_threads 2 --num_shards 2  --max_memory_gb 12 
+../build/construct_matrix --db my_toy_db/ --output_folder my_toy_matrix/ --num_threads 2 --num_shards 2  --max_memory_gb 12 
 ```
+
+The resulting matrix can then be queried in the same way as the included example, using `--matrix my_toy_matrix --db my_toy_db/`.
