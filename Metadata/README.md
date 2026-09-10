@@ -45,13 +45,13 @@ The metadata is provided in both **CSV** and **Parquet** formats.
 | `datastore_provider` | Locations of where the files are available to download from |
 | `datastore_region` | Regions of where the data is located |
 | `attributes` | Full list of sample attributes in a nested(array) structure |
-| `jattr` | JSON based string of the sample attributes |
+| `jattr` | JSON-based string of the sample attributes |
 | `run_file_version` | Version of the SRA Run file |
 | `lat_lon` | Location in the globe (latitude, longitude) following the WGS84 standard (4326 in postGIS) and encoded in WKB form |
-| `elevation` | Height above mean sea level in meters (negative elevations are present) |
-| `country` | Three letter code of the country whose the coordinate belongs to. Empty if no match to any country boundary. |
-| `biome` | Major biome code according to WWF TEW (see above) |
-| `confidence` | Confidence value, higher is better |
+| `elevation` | Height above mean sea level in meters (negative elevations are present). Source: [ASTER Global Digital Elevation Model](https://cmr.earthdata.nasa.gov/search/concepts/C1711961296-LPCLOUD.html) |
+| `country` | Three-letter code of the country whose the coordinate belongs to. Empty if no match to any country boundary. |
+| `biome` | Major biome code according to [WWF Terrestrial Ecoregions of the World](https://www.worldwildlife.org/publications/terrestrial-ecoregions-of-the-world) |
+| `confidence` | Confidence value, higher is better. Three different geocoding providers were used (AWS Esri, AWS HERE, and Azure). A confidence scoring system was devised to rank the quality of these predictions. The confidence value goes from 0 to 6 and is calculated as [country confidence (0-3), +1 for each pair of predictions lying within the same country boundary] + [distance confidence (0-3), +1 for each pair of predictions within 8km of each other] |
 
 ## Example use of the metadata Parquet file
 
