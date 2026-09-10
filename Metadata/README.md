@@ -18,10 +18,10 @@ The metadata is provided in both **CSV** and **Parquet** formats.
 
 The Parquet file can be queried directly using DuckDB.
 
-DuckDB can be installed using Conda:
+DuckDB CLI can be installed using Conda:
 
 ```bash
-conda install -c conda-forge duckdb
+conda install -c conda-forge duckdb-cli
 ```
 
 For example, the following command retrieves all WGS accessions sequenced using the Illumina platform, released after 2022, and annotated as soil metagenomes.
