@@ -14,6 +14,11 @@ The comparison ignores differences that do not affect signature content, includi
 All actual metadata values, hash values, and abundance values are still compared. The script supports both plain-text and gzip-compressed sourmash signature files.
 
 ---
+## Requirements
+
+Bash and Python 3, available on the `PATH` as `python3`. The script uses only the Python standard library, so no additional packages are required.
+
+---
 ## Usage
 
 ### Sample mode

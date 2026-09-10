@@ -12,6 +12,12 @@ The complete workflow is:
 6. Package the encoded signatures, compressed hash table, metadata, and archive version into one `.tar.xz` archive.
 ---
 
+# Requirements
+
+This pipeline has the same requirements as the decompression pipeline, listed in the [FMH README](../README.md#requirements): Linux, Bash, `tar`, `xz`, a C++17 compiler, and Python 3 available on the `PATH` as `python` with NumPy installed. The required Python packages are listed in [requirements.txt](../requirements.txt).
+
+---
+
 # Step 1: Build the Global Sorted Hash Table
 
 Go to compression directory.
