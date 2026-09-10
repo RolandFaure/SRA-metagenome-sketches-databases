@@ -16,7 +16,7 @@ To download the metadata associated with all the metagenomes in the database - S
 
 ## FracMinHashes
 
-FracMinHash sketches have been generated for all datasets using [sourmash](https://sourmash.readthedocs.io/en/latest/index.html), following the [FracMinHash](https://doi.org/10.1101/2022.01.11.475838) methodology. Each sketch was created by selecting one in every thousand 31-mers using the command: `sourmash sketch dna -p dna,k=31,scaled=1000,abund file_to_sketch.fa -o sketch_file`.
+FracMinHash sketches have been generated for all datasets using [sourmash](https://sourmash.readthedocs.io/en/latest/index.html), following the [FracMinHash](https://pmc.ncbi.nlm.nih.gov/articles/PMC10538494/) methodology. Each sketch was created by selecting one in every thousand 31-mers using the command: `sourmash sketch dna -p dna,k=31,scaled=1000,abund file_to_sketch.fa -o sketch_file`.
 
 The FracMinHash sketch database is distributed as a compressed archive. See [the dedicated folder](FMH/) for instructions on downloading the archive and reconstructing the original sourmash signature files from it.
 
