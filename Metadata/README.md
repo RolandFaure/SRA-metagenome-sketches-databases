@@ -51,7 +51,7 @@ The metadata is provided in both **CSV** and **Parquet** formats.
 | `elevation` | Height above mean sea level in meters (negative elevations are present) |
 | `country` | Three letter code of the country whose the coordinate belongs to. Empty if no match to any country boundary. |
 | `biome` | Major biome code according to WWF TEW (see above) |
-| `confidence` | confidence value, higher is better |
+| `confidence` | Confidence value, higher is better |
 
 ## Example use of the metadata Parquet file
 
