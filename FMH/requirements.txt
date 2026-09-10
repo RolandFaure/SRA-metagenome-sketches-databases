@@ -1,0 +1,7 @@
+# Python packages required by the FracMinHash compression and decompression
+# pipelines.
+numpy
+
+# Optional. Speeds up JSON parsing in compression_scripts/make_union_ht_v2.py;
+# the script falls back to the standard library json module when it is absent.
+# orjson

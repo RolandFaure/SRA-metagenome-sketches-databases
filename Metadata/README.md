@@ -4,7 +4,9 @@
 
 The metadata associated with all the metagenomes in the database is available here: https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed.
 
-The metadata is provided in both **CSV** and **Parquet** formats.
+The metadata is provided in both **CSV** (`metagenome_metadata.csv.gz`) and **Parquet** (`metagenome_metadata.parquet`) formats. ScholarSphere provides downloads through a browser, so these files cannot be retrieved with `wget` or `curl`.
+
+The same table is also included in the hypervector database archive as a plain TSV file, `metadata.tsv`. See the [Hypervectors folder](../Hypervectors/README.md#database-download) for a command-line download.
 
 ## Metadata fields
 
@@ -50,7 +52,7 @@ The metadata is provided in both **CSV** and **Parquet** formats.
 | `lat_lon` | Location in the globe (latitude, longitude) following the WGS84 standard (4326 in postGIS) and encoded in WKB form |
 | `elevation` | Height above mean sea level in meters (negative elevations are present) |
 | `country` | Three letter code of the country whose the coordinate belongs to. Empty if no match to any country boundary. |
-| `biome` | Major biome code according to WWF TEW (see above) |
+| `biome` | Major biome code according to the WWF Terrestrial Ecoregions of the World classification (Olson et al., BioScience 51(11):933, 2001) |
 | `confidence` | Confidence value, higher is better |
 
 ## Example use of the metadata Parquet file
