@@ -18,9 +18,7 @@ The metadata is provided in both **CSV** and **Parquet** formats.
 
 The Parquet file can be queried directly using DuckDB.
 
-### Install DuckDB
-
-Using Conda:
+DuckDB can be installed using Conda:
 
 ```bash
 conda install -c conda-forge duckdb
