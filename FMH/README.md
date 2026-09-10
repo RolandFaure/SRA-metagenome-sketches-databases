@@ -88,7 +88,7 @@ Display the command-line help message with:
 
 ## Toy Dataset and Additional Scripts
 
-A toy dataset containing 15 sourmash `.sig` files is available in [toy/](toy/).
+A toy dataset containing 25 sourmash `.sig` files is available in [toy/](toy/).
 
 The scripts used by the compression pipeline, along with full usage instructions, are available in [compression_scripts/](compression_scripts/).
 
