@@ -67,7 +67,7 @@ For example, the following command retrieves all WGS accessions sequenced using 
 
 ```bash
 duckdb -c "
-SELECT accession
+SELECT acc
 FROM read_parquet('metagenome_metadata.parquet')
 WHERE assay_type = 'WGS'
   AND platform = 'ILLUMINA'
