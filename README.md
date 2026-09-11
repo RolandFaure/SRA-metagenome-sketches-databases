@@ -38,6 +38,25 @@ An all-vs-all similarity matrix has been computed for all 4.8 million metagenomi
 
 See [the dedicated folder](Similarity-Matrix/) for instructions on downloading and querying the similarity matrix.
 
+## Locations of Artifacts
+The hypervector database, the filtered similarity matrix, and the metadata files are hosted through Penn State’s ScholarSphere service and are available at http://doi.org/10.26207/bvdw-mq63. The full similarity matrix and the FMH sketches are available over anonymous HTTPS from a public Globus guest collection. This collection also contains mirrors of other artifacts, for users who prefer to retrieve through traditional Unix interfaces. No Globus account, login, or client installation is required; a single `wget` or `curl` invocation is sufficient, such as:
+
+```bash
+wget https://g-3887d.ffdaa9.e229.data.globus.org/matrix.tar.zst
+```
+The download links for all artifacts are given below.
+
+| Artifact | Size | Download URL |
+|---|---:|---|
+| FMH hashes | 469 GB | https://g-77cfc.ffdaa9.e229.data.globus.org/compressed_hashes.tar.xz |
+|  |  | https://s3.amazonaws.com/logan-pub/paper/fracminhash/compressed_hashes.tar.xz |
+| Hypervector database | 9.1 GB | https://g-55efb.ffdaa9.e229.data.globus.org/vector.tar.zst |
+|  |  | https://s3.amazonaws.com/logan-pub/paper/fracminhash/vector.tar.zst |
+| Filtered matrix | 64 GB | https://g-3887d.ffdaa9.e229.data.globus.org/matrix.tar.zst |
+| Full matrix | 842 GB | https://g-bb0f1.ffdaa9.e229.data.globus.org/matrix.tar.zst |
+| Metadata (Parquet file) | 502 MB | https://g-77cfc.ffdaa9.e229.data.globus.org/metadata/metagenome_metadata.parquet |
+| Metadata (CSV file) | 692 MB | https://g-77cfc.ffdaa9.e229.data.globus.org/metadata/metagenome_metadata.csv.gz |
+
 ## Citation
 
 This work will soon be deposited on biorxiv. In the meantime, if you wish to cite this work, please contact us directly.
