@@ -153,7 +153,13 @@ int main(int argc, char* argv[]) {
         cerr << "Error: Query file not found: " << query_file << endl;
         return 1;
     }
-    
+
+    //check that the database folder exists and contains vectors.bin, dimension.txt and vector_norms.txt
+    if (!fs::exists(db_folder)) {
+        cerr << "Error: Database folder not found or does not contain the required files (vectors.bin, dimension.txt, vector_norms.txt): " << db_folder << endl;
+        return 1;
+    }
+
     string vector_file = fs::path(db_folder) / "vectors.bin";
     string dimension_file = fs::path(db_folder) / "dimension.txt";
     string norms_file = fs::path(db_folder) / "vector_norms.txt";
