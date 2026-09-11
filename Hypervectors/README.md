@@ -9,9 +9,9 @@ This repository contains scripts and tutorials for interacting with the database
 
 ## Database Download
 
-The database is available on AWS and downloadable:
+The database can be downloaded using:
 ```
-wget https://s3.amazonaws.com/logan-pub/paper/fracminhash/hypervector_db.tar.xz
+wget https://g-55efb.ffdaa9.e229.data.globus.org/vector.tar.zst
 ```
 
 ### Database Contents
