@@ -7,7 +7,7 @@ You can download the compressed FMH sketches either from a public Globus guest c
 ```bash
 wget https://g-77cfc.ffdaa9.e229.data.globus.org/compressed_hashes.tar.xz #Globus
 #or
-aws s3 cp s3://logan-pub/paper/fracminhash/fracminhash_db.tar.xz . #AWS
+aws s3 cp s3://logan-pub/paper/fracminhash/fracminhash_db.tar.xz . --no-sign-request #AWS
 #or
 wget https://s3.amazonaws.com/logan-pub/paper/fracminhash/fracminhash_db.tar.xz
 ```
