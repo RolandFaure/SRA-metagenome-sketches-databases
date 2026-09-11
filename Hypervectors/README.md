@@ -1,6 +1,6 @@
 # SRA metagenomes hypervectors
 
-This repository provides the database containing the hypervector sketches of all metagenomic accession of the SRA before December 2023, and the code needed to interact with it. You can directly interact with the database through the [similarity.logan-search.org](similarity.logan-search.org) website or you can download it locally (~50GB). The fundamental property of hypervectors is that the dot product between the hypervectors of datasets A and B is on average the size of their intersection.
+This repository provides the database containing the hypervector sketches of all metagenomic accession of the SRA before December 2023, and the code needed to interact with it. You can directly interact with the database through the [similarity.logan-search.org](https://similarity.logan-search.org) website or you can download it locally (~50GB). The fundamental property of hypervectors is that the dot product between the hypervectors of datasets A and B is on average the size of their intersection.
 
 This repository contains scripts and tutorials for interacting with the database. Specifically, it includes:
 - [Instructions to download the hypervector database locally](#database-download)
@@ -85,7 +85,7 @@ To find SRA accessions with the highest Jaccard similarity to your dataset(s):
 
 1. Sketch your dataset(s) using the script [above](#creating-hypervectors-of-your-datasets)
 2. If you have multiple hypervectors, concatenate them into a single bin file
-3. Upload the sketch to [similarity.logan-search.org](similarity.logan-search.org) or run the `query` script against the local database:
+3. Upload the sketch to [similarity.logan-search.org](https://similarity.logan-search.org) or run the `query` script against the local database:
 
 ```bash
 ./bin/query --query <file> --db <folder> --output <file> \
