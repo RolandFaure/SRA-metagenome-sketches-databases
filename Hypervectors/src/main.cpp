@@ -12,16 +12,16 @@
 
 namespace fs = std::filesystem;
 
-void write_binary_vector(const std::string& filename, const std::vector<int32_t>& vec) {
+void write_binary_vector(const std::string& filename, const std::vector<int16_t>& vec) {
     std::ofstream outfile(filename, std::ios::binary);
     if (!outfile) {
         throw std::runtime_error("Error opening output file: " + filename);
     }
     
-    // Write each element as int32
+    // Write each element as int16
     for (int i = 0; i < (int)vec.size(); ++i) {
-        int32_t val = static_cast<int32_t>(vec[i]);
-        outfile.write(reinterpret_cast<const char*>(&val), sizeof(int32_t));
+        int16_t val = static_cast<int16_t>(vec[i]);
+        outfile.write(reinterpret_cast<const char*>(&val), sizeof(int16_t));
     }
     
     outfile.close();
@@ -224,7 +224,7 @@ int main(int argc, char* argv[]) {
         
         // Step 3: Transform hashes to vector using random projection
         std::cout << "\n[Step 3] Transforming to vector..." << std::endl;
-        std::vector<int32_t> projected_vec = transform_set_into_vector(hashes, dimension);
+        std::vector<int16_t> projected_vec = transform_set_into_vector(hashes, dimension);
         
         // Step 4: Write binary output
         std::cout << "\n[Step 4] Writing binary output..." << std::endl;

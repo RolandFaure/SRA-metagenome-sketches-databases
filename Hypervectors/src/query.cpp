@@ -24,18 +24,18 @@ MatrixXll load_vectors_block(const string& file_path, int dimension, int start_i
         return MatrixXll();
     }
     
-    uint64_t vector_size = dimension * sizeof(int32_t);
+    uint64_t vector_size = dimension * sizeof(int16_t);
     file.seekg(start_idx * vector_size);
     
     int num_vectors = end_idx - start_idx;
-    vector<int32_t> buffer(num_vectors * dimension);
+    vector<int16_t> buffer(num_vectors * dimension);
     file.read(reinterpret_cast<char*>(buffer.data()), num_vectors * vector_size);
     file.close();
     
     MatrixXll matrix(dimension, num_vectors);
     for (int i = 0; i < num_vectors; ++i) {
         for (int j = 0; j < dimension; ++j) {
-            matrix(j, i) = buffer[i * dimension + j];
+            matrix(j, i) = static_cast<int64_t>(buffer[i * dimension + j]);
         }
     }
     
@@ -53,7 +53,7 @@ int get_num_vectors(const string& file_path, int dimension) {
     int64_t file_size = file.tellg();
     file.close();
     
-    uint64_t vector_size = dimension * sizeof(int32_t);
+    uint64_t vector_size = dimension * sizeof(int16_t);
     return file_size / vector_size;
 }
 

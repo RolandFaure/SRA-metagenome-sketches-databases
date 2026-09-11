@@ -1,10 +1,10 @@
 #include "random_projection.h"
 #include <cstdint>
 
-std::vector<int32_t> transform_set_into_vector(const std::unordered_set<unsigned long int> &hashes, int d){
+std::vector<int16_t> transform_set_into_vector(const std::unordered_set<unsigned long int> &hashes, int d){
     int spacing_seed_factor = int(d / 64);
     spacing_seed_factor = 1;
-    std::vector<int32_t> vec(d, 0);
+    std::vector<int16_t> vec(d, 0);
     for (const auto& hash : hashes) {
         for (int i = 0; i < d; i += 64) {
             uint64_t x = static_cast<uint64_t>(hash) + static_cast<uint64_t>(i * spacing_seed_factor);
