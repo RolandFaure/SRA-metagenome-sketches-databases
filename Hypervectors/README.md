@@ -12,6 +12,8 @@ This repository contains scripts and tutorials for interacting with the database
 The database can be downloaded using:
 ```
 wget https://g-55efb.ffdaa9.e229.data.globus.org/vector.tar.zst
+mkdir -p vector && tar -xf vector.tar.zst -C vector
+cd vector
 ```
 
 ### Database Contents
