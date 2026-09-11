@@ -23,6 +23,7 @@ The archive is 470 GB, and decompressing it reconstructs several terabytes of `.
 - Linux
 - Bash
 - Python 3
+- NumPy
 - C++17 compiler (`g++`)
 
 ### Clone the Repository 
