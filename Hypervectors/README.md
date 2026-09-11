@@ -11,7 +11,7 @@ This repository contains scripts and tutorials for interacting with the database
 
 The database is available on AWS and downloadable:
 ```
-wget https://s3.amazonaws.com/logan-pub/paper/fracminhash/hypervectors_db.tar.xz
+wget https://s3.amazonaws.com/logan-pub/paper/fracminhash/hypervector_db.tar.xz
 ```
 
 ### Database Contents
@@ -38,7 +38,7 @@ conda install main::pkg-config conda-forge::sourmash-minimal conda-forge::eigen
 Clone the repository and build the project:
 
 ```bash
-git clone https://github.com/RolandFaure/SRA-sketches-database.git
+git clone https://github.com/RolandFaure/SRA-metagenome-sketches-databases.git
 cd SRA-sketches-database/Hypervectors
 make
 ```
