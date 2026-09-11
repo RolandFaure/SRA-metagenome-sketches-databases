@@ -41,7 +41,7 @@ Clone the repository and build the project:
 
 ```bash
 git clone https://github.com/RolandFaure/SRA-metagenome-sketches-databases.git
-cd SRA-metagenome-sketches-database/Hypervectors
+cd SRA-metagenome-sketches-databases/Hypervectors
 make
 ```
 
