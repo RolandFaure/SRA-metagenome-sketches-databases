@@ -1,6 +1,6 @@
 # SRA metagenomes hypervectors
 
-This repository provides the database containing the hypervector sketches of all metagenomic accession of the SRA before December 2023, and the code needed to interact with it. You can directly interact with the database through the [similarity.logan-search.org](https://similarity.logan-search.org) website or you can download it locally (8.9 GB compressed, 31 GB extracted). The fundamental property of hypervectors is that the dot product between the hypervectors of datasets A and B, once each vector has been divided by `sqrt(2048)` as described below, is on average the number of hashes shared by their FracMinHash sketches. Since the sketches retain one 31-mer in every thousand, multiplying this dot product by 1000 estimates the size of the intersection of the two full 31-mer sets.
+This repository provides the database containing the hypervector sketches of all metagenomic accession of the SRA before December 2023, and the code needed to interact with it. You can directly interact with the database through the [similarity.logan-search.org](https://similarity.logan-search.org) website or you can download it locally (8.9 GB compressed, 31 GB extracted). The fundamental property of hypervectors is that the dot product between the hypervectors of datasets A and B is on average the number of hashes shared by their FracMinHash sketches. Since the sketches retain one 31-mer in every thousand, multiplying this dot product by 1000 estimates the size of the intersection of the two full 31-mer sets.
 
 This repository contains scripts and tutorials for interacting with the database. Specifically, it includes:
 - [Instructions to download the hypervector database locally](#database-download)
@@ -24,9 +24,8 @@ The download is 8.9 GB and expands to 31 GB once extracted. The same data is als
 In the database, you will find five files:
 
 - **dimension.txt** — Contains a single number representing the dimension of the hypervectors (should be 2048)
-- **metadata.tsv** — A TSV file containing the list of all accessions with their corresponding metadata, one row per accession, in the same order as `vectors.bin`. The fields are documented in the [Metadata folder](../Metadata/)
-- **vectors.bin** — Contains all the hypervectors in byte format. Each vector is a concatenation of 2048 int32 values. Each value is stored as an int for convenience but should be divided by sqrt(2048) when used. The file is the concatenation of the hypervectors in the order described in metadata.tsv
-- **vector_norms.txt** — A fixed-width file containing one line per accession, giving the accession and the norm of its hypervector, in the same order as `vectors.bin`. This file is used by `query` to associate each hit with its accession
+- **vectors.bin** — Contains all the hypervectors in byte format. Each vector is a concatenation of 2048 int16 values. Each value is stored as an int for convenience but should be divided by sqrt(2048) when used. The file is the concatenation of the hypervectors in the order described in vector_norms.txt
+- **vector_norms.txt** — A fixed-width file containing one line per accession, giving the accession name and the norm of its hypervector, in the same order as `vectors.bin`. This file is used by `query` to associate each hit with its accession
 - **all_errors_confidence_interval_95.txt** — A file containing precomputed 95% confidence intervals
 
 ## Creating hypervectors from custom datasets
@@ -83,7 +82,7 @@ The input file can be a fasta or fastq file, optionally gzipped. The output is a
 
 #### Output Format
 
-The `.bin` file contains a byte-packed vector where each value is stored as an int32. Values should be divided by sqrt(d) before local usage or uploaded as such on [similarity.logan-search.org](https://similarity.logan-search.org) and in other commands of this tool suite.
+The `.bin` file contains a byte-packed vector where each value is stored as an int16. Values should be divided by sqrt(d) before local usage or uploaded as such on [similarity.logan-search.org](https://similarity.logan-search.org) and in other commands of this tool suite.
 
 ### Comparing Datasets Against the Database
 
@@ -98,7 +97,7 @@ To find SRA accessions with the highest Jaccard similarity to your dataset(s):
             [--num_threads <int>] [--top_k <int>] [--help]
 ```
 
-Here, `--db` is the folder into which `hypervector_db.tar.xz` was extracted, not the folder containing the executables.
+Here, `--db` is the folder into which `hypervector_db.tar.gz` was extracted, not the folder containing the executables.
 
 This returns a TSV file with the top `k` most similar accessions in the SRA (up to 2023) ranked by Jaccard similarity. The three columns are:
 - Index of your query (if multiple hypervectors were queried)
