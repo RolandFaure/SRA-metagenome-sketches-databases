@@ -11,7 +11,7 @@ Roland Faure, Adrita Hossain Nakshi, Md. Hasin Abrar, Teo Lemane, Mohsen Taheri,
 | File	| Description  	|
 |---	|---	|
 | matrix.tar.zst  	|  Filtered matrix, retaining for each accession all neighbors with similarity >= 0.2, as well as the closest remaining neighbors, within the limit of 10,000 neighbors per accession		|
-| vector.tar.zst 	|  Hypervector database, the same data as `hypervector_db.tar.xz` distributed on AWS    |
+| hypervector_db.tar.gz  	|  Hypervector database  |
 | metagenome_metadata.parquet 	|  Metadata file in parquet format 	|
 | metagenome_metadata.csv.gz  	|  Metadata file in CSV format (gzipped) 	|
 
