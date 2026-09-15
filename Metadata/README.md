@@ -4,6 +4,14 @@
 
 The metadata associated with all the metagenomes in the database is available here: https://scholarsphere.psu.edu/resources/294e84a2-3d39-4965-8e1b-bd147166a4ed.
 
+It can also be downloaded directly from a terminal:
+```
+#parquet file
+wget https://g-77cfc.ffdaa9.e229.data.globus.org/metadata/metagenome_metadata.parquet
+#csv file
+wget https://g-77cfc.ffdaa9.e229.data.globus.org/metadata/metagenome_metadata.csv.gz
+```
+
 The metadata is provided in both **CSV** (`metagenome_metadata.csv.gz`) and **Parquet** (`metagenome_metadata.parquet`) formats. ScholarSphere provides downloads through a browser, so these files cannot be retrieved with `wget` or `curl`.
 
 The same table is also included in the hypervector database archive as a plain TSV file, `metadata.tsv`. See the [Hypervectors folder](../Hypervectors/README.md#database-download) for a command-line download.
