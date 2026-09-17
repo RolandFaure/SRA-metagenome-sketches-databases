@@ -49,7 +49,7 @@ The download links for all artifacts are given below.
 | Artifact | Size | Download URL |
 |---|---:|---|
 | FMH hashes | 469 GB | https://g-77cfc.ffdaa9.e229.data.globus.org/compressed_hashes.tar.xz |
-| Hypervector database | 9.1 GB | https://g-55efb.ffdaa9.e229.data.globus.org/vector.tar.zst |
+| Hypervector database | 9.1 GB | https://g-77cfc.ffdaa9.e229.data.globus.org/hypervector_db.tar.gz |
 | Filtered similarity matrix | 64 GB | https://g-3887d.ffdaa9.e229.data.globus.org/matrix.tar.zst |
 | Full similarity matrix | 842 GB | https://g-bb0f1.ffdaa9.e229.data.globus.org/matrix.tar.zst |
 | Metadata (Parquet file) | 502 MB | https://g-77cfc.ffdaa9.e229.data.globus.org/metadata/metagenome_metadata.parquet |
