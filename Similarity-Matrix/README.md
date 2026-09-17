@@ -4,6 +4,8 @@ This folder contains code for constructing similarity matrices from genomic data
 
 ## Downloading the Similarity Matrix
 
+The similarity matrix is stored using a custom compressed representation described in our paper. To facilitate access to the compressed matrix, we provide the `query` executable, which supports three operations for querying and interacting with the matrix.
+
 To download the full similarity matrix (842 GB compressed):
 ```bash
 wget https://g-bb0f1.ffdaa9.e229.data.globus.org/matrix.tar.zst
