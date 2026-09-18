@@ -21,10 +21,9 @@ cd big_db_reordered
 In the database, you will find five files:
 
 - **dimension.txt** — Contains a single number representing the dimension of the hypervectors (should be 2048)
-- **vector_norms.txt** — A text file containing the norm of all the hypervectors
+- **vector_norms.txt** — A text file containing the accession name and norm of all the hypervectors
 - **vectors.bin** — Contains all the hypervectors in byte format. Each vector is a concatenation of 2048 int32 values. Each value is stored as an int for convenience but should be divided by sqrt(2048) when used. The file is the concatenation of the hypervectors in the order described in `vector_norms.txt`
 
-**Note:** This is a temporary small database for testing purposes.
 ## Creating hypervectors from custom datasets
 
 ### Installation
